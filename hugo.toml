@@ -1,4 +1,4 @@
-baseURL = 'https://cegepmv.github.io/313/'
+baseURL = 'https://cegepmv.github.io/420-313/'
 locale = 'fr-ca'
 title = 'SÉCURITÉ INFORMATIQUE'
 theme = 'hugo-theme-relearn'
@@ -6,7 +6,7 @@ enableEmoji = true
 
 [params]
   disableLandingPageButton = true
-  themeVariant = ['red', 'zen-dark', 'zen-light']
+  themeVariant = ['zen-dark', 'zen-light']
   [params.logo]
     src = '/images/logo.png'
     direction = 'row'

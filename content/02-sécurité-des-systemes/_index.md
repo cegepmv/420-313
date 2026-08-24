@@ -1,7 +1,7 @@
 +++
 pre = '<b>02. </b>'
 title = 'Sécurité des systèmes'
-weight = '100'
+weight = '200'
 draft = false
 +++
 
@@ -11,12 +11,8 @@ Portail Wikipédia : Sécurité informatique -->
 
 Le **système d'information** représente un patrimoine essentiel de l'organisation qu'il convient de protéger. La sécurité informatique consiste à garantir que les ressources matérielles ou logicielles d'une organisation sont **uniquement utilisées dans le cadre prévu**.
 
-C'est l'ensemble des moyens techniques, organisationnels, juridiques et humains nécessaires et mis en place pour conserver, rétablir et garantir la sécurité du système d'information. La raison principale de l'existence de l'industrie de la sécurité informatique est que les produits et services informatiques ne sont pas naturellement sûrs.
+C'est l'ensemble des moyens techniques, organisationnels, juridiques et humains nécessaires et mis en place pour conserver, rétablir et garantir la sécurité du système d'information. La raison principale de l'existence de l'industrie de la sécurité informatique est que **les produits et services informatiques ne sont pas naturellement sûrs**.
 
-+ Le **système d'information** représente un patrimoine essentiel pour une organisation.
-+ La sécurité informatique garantit que les ressources sont utilisées **uniquement dans le cadre prévu**.
-+ Elle regroupe des moyens techniques, organisationnels, juridiques et humains.
-+ Raison d'être de l'industrie : les produits et services informatiques ne sont pas naturellement sûrs.
 
 ## Objectifs de la sécurité informatique : CIA
 
@@ -27,15 +23,16 @@ Les trois objectifs fondamentaux (*Confidentiality, Integrity, Availability*) :
 ![CIA](/images/02-CIA.png)
 
 ### Confidentialité de l'information
-L'information n'est accessible qu'à ceux qui en ont le droit (ou le besoin dans le cadre de leur travail/responsabilité). Cette notion peut évoluer avec le temps et implique un équilibre entre intérêts publics et privés.
+L'information n'est **accessible qu'à ceux qui en ont le droit** (ou le besoin dans le cadre de leur travail/responsabilité). Cette notion peut évoluer avec le temps et implique un équilibre entre intérêts publics et privés.
 
 ### Intégrité des services et de l'information
 
-Les services et l'information ne peuvent être modifiés que par les individus autorisés (administrateurs, propriétaires, etc.). Objectifs : exactitude, précision, autorisation de modification, cohérence.
+Les services et l'information ne peuvent être **modifiés que par les individus autorisés** (administrateurs, propriétaires, etc.). 
++ **Objectifs :** exactitude, précision, autorisation de modification, cohérence.
 
 ### Disponibilité des services et de l'information
 
-Les services et l'information ne sont accessibles qu'aux personnes autorisées, et quand elles en ont besoin. Doit tenir compte des contraintes de temps, de qualité et de performance.
+Les services et l'information ne sont accessibles qu'aux personnes autorisées, et **quand elles en ont besoin**. Doit tenir compte des contraintes de temps, de qualité et de performance.
 
 ### Objectifs complémentaires
 - **L'authentification** : identifier les utilisateurs afin de pouvoir gérer les accès et maintenir la confiance.
@@ -43,7 +40,7 @@ Les services et l'information ne sont accessibles qu'aux personnes autorisées, 
 - **La non-répudiation et l'imputation** : ne pas être en mesure de nier ses propres actes, ni de s'attribuer les actes de quelqu'un d'autre.
 - **La journalisation ou traçabilité** : répertorier tout accès, toute modification, etc.
 
-### Pourquoi protéger une organisation ?
+### Pourquoi est-ce important pour une organisation ?
 + Protéger sa réputation.
 + Assurer la continuité de ses activités.
 + Protéger ses données stratégiques et sa propriété intellectuelle.
@@ -54,9 +51,16 @@ Les services et l'information ne sont accessibles qu'aux personnes autorisées, 
 
 ### Principes fondamentaux
 
-**Principe du point le plus faible** : une personne qui cherche à pénétrer un système utilisera tous les moyens possibles pour le faire, mais pas nécessairement le moyen le plus évident ou celui bénéficiant de la défense la plus solide.
++ **Principe du point le plus faible** : une personne qui cherche à pénétrer un système utilisera tous les moyens possibles pour le faire, mais pas nécessairement le moyen le plus évident ou celui bénéficiant de la défense la plus solide.
+  + Un système de sécurité est aussi fort que son maillon le plus faible.
+  + Une seule faille suffit pour briser toute la sécurité.
+  + Les attaquants ciblent toujours l'élément le plus vulnérable.
+  + Exemples: 
+    + Mot de passe : Un compte ultra-sécurisé peut être piraté si la question de sécurité ou l'e-mail de récupération est facile à deviner.
+    + Réseau d'entreprise : Un pare-feu très cher ne sert à rien si un employé clique sur un lien de phishing.
 
-**Principe de la protection adéquate (gestion du risque)** : le niveau et le coût de la protection doivent correspondre à l'importance et à la valeur de ce qu'on veut protéger. La durée de la protection doit correspondre à la période pendant laquelle l'importance et la valeur sont présentes, et pas plus.
++ **Principe de la protection adéquate (gestion du risque)** : le niveau et le coût de la protection doivent correspondre à l'importance et à la valeur de ce qu'on veut protéger. 
+  + **Exemple données publiques vs sensibles :** Un site web vitrine d'entreprise ne nécessite pas de chiffrement lourd des pages lues par tous, contrairement à une base de données bancaire qui exige un chiffrement fort (AES-256) des données au repos et en transit.
 
 
 ## Organismes de certification et normes
@@ -122,5 +126,3 @@ La certification n'est pas obligatoire, mais elle permet d'afficher la conformit
 
 ## Politique de sécurité et classification de l'information
 Une **politique de sécurité** formalise les règles et responsabilités en matière de sécurité de l'information au sein de l'organisation. Elle s'accompagne généralement d'une **classification de l'information** (par exemple : public, interne, confidentiel, restreint), qui permet d'appliquer des mesures de protection proportionnées à la sensibilité de chaque catégorie.
-
-{{% notice tip "Exercice" %}} Pour une PME fictive, rédigez une ébauche de politique de sécurité incluant : le périmètre, les catégories d'information à classifier, et une mesure associée à chaque catégorie. {{% /notice %}}
