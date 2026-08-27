@@ -1,8 +1,7 @@
 :root {
   /* zen-light */
-  --PRIMARY-color: rgba(1, 190, 190, 0.689);
+  --PRIMARY-color: rgba(1, 190, 190, 0.904);
   /* brand primary color */
-  --PRIMARY-HOVER-color: rgba(0, 125, 125, 0.689);
   /* brand primary hover color */
   --SECONDARY-color: var(--PRIMARY-color);
   /* brand secondary color */
@@ -66,7 +65,7 @@
   /* fallback background color of block code; should be adjusted to your selected chroma style */
   --CODE-BLOCK-BORDER-color: rgba(210, 210, 210, 1);
   /* border color of block code */
-  --CODE-INLINE-color: rgba(255, 75, 58);
+  --CODE-INLINE-color: rgba(255, 74, 58, 0.795);
   /* text color of inline code */
   --CODE-INLINE-BG-color: rgba(255, 250, 233, 1);
   /* background color of inline code */

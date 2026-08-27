@@ -4,10 +4,8 @@ title = 'Sécurité des systèmes'
 weight = '200'
 draft = false
 +++
+------------
 
-<!-- Références
-http://www.27000.org/
-Portail Wikipédia : Sécurité informatique -->
 
 Le **système d'information** représente un patrimoine essentiel de l'organisation qu'il convient de protéger. La sécurité informatique consiste à garantir que les ressources matérielles ou logicielles d'une organisation sont **uniquement utilisées dans le cadre prévu**.
 
@@ -20,7 +18,7 @@ Les trois objectifs fondamentaux (*Confidentiality, Integrity, Availability*) :
 
 <!-- 📊 Illustration suggérée : triangle CIA (Confidentialité / Intégrité / Disponibilité) avec un exemple pour chaque sommet. -->
 
-![CIA](/images/02-CIA.png)
+![CIA](/images/02-CIA.png?height=50vh)
 
 ### Confidentialité de l'information
 L'information n'est **accessible qu'à ceux qui en ont le droit** (ou le besoin dans le cadre de leur travail/responsabilité). Cette notion peut évoluer avec le temps et implique un équilibre entre intérêts publics et privés.
@@ -126,3 +124,12 @@ La certification n'est pas obligatoire, mais elle permet d'afficher la conformit
 
 ## Politique de sécurité et classification de l'information
 Une **politique de sécurité** formalise les règles et responsabilités en matière de sécurité de l'information au sein de l'organisation. Elle s'accompagne généralement d'une **classification de l'information** (par exemple : public, interne, confidentiel, restreint), qui permet d'appliquer des mesures de protection proportionnées à la sensibilité de chaque catégorie.
+
+## Références et liens
++ [Suite ISO/CEI 27000 - Wikipédia](https://fr.wikipedia.org/wiki/Suite_ISO/CEI_27000)
++ [Computer emergency response team (CERT) - Wikipédia](https://fr.wikipedia.org/wiki/Computer_emergency_response_team)
++ [(ISC)² - Site officiel](https://www.isc2.org/)
++ [ECCounsil - Certified Ethical Hacker (CEH)](https://www.eccouncil.org/train-certify/certified-ethical-hacker-ceh-v13-north-america/)
++ [ISACA-CICM - Site officiel](https://www.isaca.org/credentialing/cism)
++ [Certifications GIAC - Site officiel](https://www.giac.org/)
++ [HIPAA - Wikipédia](https://fr.wikipedia.org/wiki/Health_Insurance_Portability_and_Accountability_Act)

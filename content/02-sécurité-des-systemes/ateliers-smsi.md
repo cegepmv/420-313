@@ -1,70 +1,12 @@
 +++
-title = 'Exercices et ateliers'
-weight = '210'
+title = 'Ateliers - Politique de sécurité'
+weight = '220'
 draft = false
 +++
+----------
 
 
-## 1- CIA
-
-### Stockage infonuagique (cloud) pour documents d'entreprise
-
-L'adoption de services de stockage infonuagique (type Google Drive, Dropbox, OneDrive) permet aux employés de synchroniser et partager facilement des documents de travail depuis n'importe quel appareil.
-
-**Avantages :**
-+ Accessibilité depuis n'importe où et n'importe quel appareil
-+ Collaboration en temps réel entre plusieurs employés
-+ Sauvegarde automatique, réduisant le risque de perte de données
-
-Quelles sont les vulnérabilités (potentielles) du stockage infonuagique ? (Confidentialité/Intégrité/Disponibilité)
-
-### Clés USB personnelles en milieu de travail
-
-Les employés utilisent fréquemment leurs propres clés USB pour transférer des fichiers entre leur poste de travail et leur domicile, ou entre collègues.
-
-**Avantages :**
-+ Facilité et rapidité de transfert de fichiers volumineux
-+ Aucun coût pour l'entreprise
-+ Indépendance vis-à-vis du réseau ou d'une connexion Internet
-
-Quelles sont les vulnérabilités (potentielles) des clés persionnelles en milieu de travail ? (Confidentialité/Intégrité/Disponibilité)
-
-### Télétravail via réseau Wi-Fi domestique
-
-De plus en plus d'employés se connectent au réseau de l'entreprise depuis leur domicile, via leur propre routeur Wi-Fi, pour accéder aux applications et serveurs internes (VPN ou accès direct).
-
-**Avantages :**
-+ Flexibilité horaire et géographique pour les employés
-+ Réduction des coûts immobiliers pour l'entreprise
-+ Continuité des opérations en cas d'événement empêchant l'accès aux bureaux
-
-Quelles sont les vulnérabilités (potentielles) du télétravail via réseau Wi-Fi domestique ? (Confidentialité/Intégrité/Disponibilité)
-
-### Assistants vocaux intelligents (Alexa, Google Home) en entreprise
-
-Certains bureaux installent des assistants vocaux dans les salles de conférence pour faciliter la prise de notes, la planification de réunions ou le contrôle de l'éclairage/climatisation.
-
-**Avantages :**
-+ Gain de temps pour les tâches administratives (prise de rendez-vous, rappels)
-+ Contrôle mains libres des équipements de la salle
-+ Impression de modernité pour les visiteurs et clients
-
-Quelles sont les vulnérabilités (potentielles) des assistants vocaux intelligents dans les lieux de travail ? (Confidentialité/Intégrité/Disponibilité)
-
-### Dispositifs médicaux connectés (IoT santé)
-
-Certains hôpitaux et cliniques utilisent des dispositifs médicaux connectés (pompes à perfusion intelligentes, moniteurs cardiaques sans fil) reliés au réseau interne pour la surveillance à distance des patients.
-
-**Avantages :**
-+ Surveillance continue et en temps réel des signes vitaux
-+ Réduction du temps de déplacement du personnel infirmier
-+ Alertes automatiques en cas d'anomalie
-
-Quelles sont les vulnérabilités (potentielles) du stockage infonuagique ? (Confidentialité/ Intégrité/Disponibilité)
-
-## 2- Mise en place d'une politique de sécurité
-
-### TransLog Inc.
+### Cas 1 — TransLog Inc.
 
 **TransLog Inc.** est une PME de transport et logistique comptant 60 employés : chauffeurs, répartiteurs, personnel administratif et un responsable TI. Elle utilise un logiciel de gestion de flotte (géolocalisation GPS des camions, itinéraire de livraison), un système de facturation client, une messagerie courriel, et un site web avec formulaire de demande de soumission. Un Wi-Fi public est aussi offert aux visiteurs dans la salle d'attente du garage.
 
@@ -113,7 +55,7 @@ On choisit des mesures techniques, organisationnelles ou humaines, proportionné
 |Confidentiel|	Accès limité par rôle ; chiffrement des courriels contenant des contrats|
 |Restreint|	Chiffrement des données GPS ; accès à l'application de suivi limité aux répartiteurs et à la direction ; journalisation des consultations d'itinéraires|
 
-## BioVerte
+### Cas 2 — BioVerte
 
 **BioVerte** est une PME agroalimentaire de 40 employés qui produit et distribue des aliments biologiques. Elle exploite :
 
