@@ -65,9 +65,9 @@
   /* fallback background color of block code; should be adjusted to your selected chroma style */
   --CODE-BLOCK-BORDER-color: rgba(210, 210, 210, 1);
   /* border color of block code */
-  --CODE-INLINE-color: rgba(255, 74, 58, 0.795);
+  --CODE-INLINE-color: rgba(253, 25, 4, 0.979);
   /* text color of inline code */
-  --CODE-INLINE-BG-color: rgba(255, 250, 233, 1);
+  --CODE-INLINE-BG-color: rgb(255, 250, 233);
   /* background color of inline code */
   --CODE-INLINE-BORDER-color: rgba(248, 232, 200, 1);
   /* border color of inline code */

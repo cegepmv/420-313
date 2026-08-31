@@ -17,6 +17,7 @@ Reprenons le contexte de **TransLog Inc.**, une PME de transport et logistique d
 - l'**impact** (conséquence si le risque se matérialise), de 1 (négligeable) à 5 (catastrophique) ;
 - la **probabilité** (chance que ça arrive), de 1 (très rare) à 5 (quasi certain) ;
 - le **niveau de risque** = impact × probabilité (échelle de 1 à 25).
+
 **Étape 3 — Prioriser et traiter** : les risques avec le score le plus élevé sont traités en priorité, selon les quatre types de traitement vus à la section 3.6 (acceptation, évitement, transfert, réduction).
  
 ### Grille d'analyse — TransLog

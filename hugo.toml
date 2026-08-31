@@ -5,6 +5,7 @@ theme = 'hugo-theme-relearn'
 enableEmoji = true
 
 [params]
+  disableInlineCopyToClipBoard = true
   disableLandingPageButton = true
   themeVariant = ['zen-dark', 'zen-light']
   collapsibleMenu = true
