@@ -68,10 +68,10 @@ et que la clé est `abc`, quel est le message en clair?
 Quelle est la clé (en caractères)?
 {{% /notice %}}
 
-<!-- {{% expand "Réponse" %}}
+{{% expand "Réponse" %}}
 1. nuage
 2. bim
-{{% /expand %}} -->
+{{% /expand %}}
 
 
 

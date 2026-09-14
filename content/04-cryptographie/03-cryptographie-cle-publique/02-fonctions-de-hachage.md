@@ -37,11 +37,8 @@ Une fonction de hachage ne sert pas à chiffrer un message.
 + Le **chiffrement** permet de transformer des données afin qu'elles puissent être récupérées à l'aide d'une clé.
 + Le **hachage** produit une empreinte qui sert notamment à vérifier ou représenter une donnée.
 
-```text
-Chiffrement : Message + clé ──► Données chiffrées ──► Message
+![Hachage vs. Chiffrement](/images/04-hachage-vs-chiffrement.png)
 
-Hachage : Message ──► Empreinte
-```
 Une fonction de hachage cryptographique ne nécessite donc pas de clé.
 
 ## Algorithmes de hachage courants
@@ -80,25 +77,12 @@ Les fonctions de hachage sont utilisées dans de nombreux contextes.
 ### Vérification de l'intégrité
 
 Une empreinte peut être utilisée pour vérifier qu'un fichier n'a pas été modifié.
-```text
-Fichier original
-      │
-      ▼
-   SHA-256
-      │
-      ▼
-Empreinte publiée
-```
+
+![Intégrité du fichier original](/images/04-integrite-fichier-original.png)
+
 Après téléchargement :
-```text
-Fichier téléchargé
-      │
-      ▼
-   SHA-256
-      │
-      ▼
-Comparaison avec l'empreinte publiée
-```
+
+![Intégrité du fichier original](/images/04-integrite-fichier-telecharge.png)
 
 Si les empreintes sont différentes, le fichier téléchargé n'est pas identique au fichier original.
 
@@ -114,7 +98,7 @@ Pour obtenir une véritable garantie d'authenticité, on utilise notamment une *
 
 ### Structures de données
 
-Les fonctions de hachage sont également utilisées en programmation pour construire des structures de données comme les **tables de hachage** (**hash tables*).
+Les fonctions de hachage sont également utilisées en programmation pour construire des structures de données comme les **tables de hachage** (*hash tables*).
 
 Elles permettent notamment de retrouver efficacement une valeur à partir d'une clé.
 

@@ -5,7 +5,7 @@ draft = false
 +++
 -------------
 
-## La chaîne de confiance
+<!-- ## La chaîne de confiance
 
 Dans la pratique, un navigateur ne possède pas nécessairement directement la clé publique de chaque autorité qui signe les certificats des serveurs.
 
@@ -34,7 +34,7 @@ La cryptographie à clé publique permet de vérifier une signature ou d'utilise
 
 Les certificats et la PKI ajoutent une infrastructure permettant d'établir cette relation de confiance.
 
-{{%/notice%}}
+{{%/notice%}} -->
 
 ## Infrastructure à clé publique (PKI)
 
@@ -56,9 +56,6 @@ La PKI permet ainsi de construire une **chaîne de confiance** entre une clé pu
 ```text
 
 Autorité racine
-       │
-       ▼
-Autorité intermédiaire
        │
        ▼
 Certificat

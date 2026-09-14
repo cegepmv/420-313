@@ -86,6 +86,6 @@ Vous recevez le message suivant chiffré par la méthode de Vigenère:
 Quel est le texte en clair?
 {{% /notice %}}
 
-<!-- {{% expand "Solution" %}}
+{{% expand "Solution" %}}
 “Le vieux pêcheur contemplait paisiblement le coucher de soleil”
-{{% /expand %}} -->
+{{% /expand %}}

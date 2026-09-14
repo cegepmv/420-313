@@ -54,17 +54,17 @@ Lorsqu'un serveur obtient un certificat, celui-ci contient notamment :
         ┌────────────────────────────────┐
         │       Certificat du serveur    │
         │                                │
-        │ Domaine                         │
-        │ Clé publique                    │
-        │ Validité                        │
-        │ Émetteur                        │
-        │ Signature de la CA              │
+        │ Domaine                        │
+        │ Clé publique                   │
+        │ Validité                       │
+        │ Émetteur                       │
+        │ Signature de la CA             │
         └────────────────────────────────┘
 ```
 
 La CA utilise sa clé privée pour signer le certificat.
 
-Le navigateur utilise ensuite la clé publique de la CA, directement ou au moyen d'une chaîne de certificats, pour vérifier cette signature.
+Le navigateur utilise ensuite la clé publique de la CA pour vérifier cette signature.
 
 ```text
 
