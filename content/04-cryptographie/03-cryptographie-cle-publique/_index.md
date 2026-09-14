@@ -82,15 +82,15 @@ Le chiffrement asymétrique est nettement plus lent (souvent ~1000 fois) que le 
 {{%/notice%}}
 
 {{%notice style="info" title="Principaux algorithmes"%}}
-+ **RSA :** L'algorithme le plus ancien et le plus populaire (chiffrement et signature), repose sur la difficulté mathématique de la factorisation de grands nombres premiers. 
-+ **DSA (*Digital Signature Algorithm*):** Principalement utilisé pour authentifier des messages et créer des signatures numériques plutôt que pour chiffrer directement des données.
-+ **ECC (Courbes Elliptiques) :** Utilise les mathématiques des courbes elliptiques, offre une sécurité équivalente à RSA mais avec des clés beaucoup plus courtes. Cela le rend plus rapide et idéal pour les appareils mobiles.
++ **RSA :** Algorithme de cryptographie à clé publique reposant sur les propriétés mathématiques de la factorisation des grands nombres. Il peut notamment être utilisé pour certaines opérations de chiffrement et de signature.
++ **DSA (*Digital Signature Algorithm*):** Algorithme conçu pour les signatures numériques.
++ **ECC (Courbes Elliptiques) :** Famille de techniques cryptographiques utilisant les mathématiques des courbes elliptiques. Elles permettent d'obtenir une sécurité comparable à certains systèmes RSA avec des clés de taille plus réduite.
 {{%/notice%}}
 
 [Reel explicatif](https://www.youtube.com/shorts/4vUeGKPl3mU)
 
-### Chiffrer ou signer ?
+<!-- ### Chiffrer ou signer ?
 
 - **Chiffrer avec la clé publique** : seule la personne possédant la clé privée correspondante pourra déchiffrer → garantit la **confidentialité**.
 - **Chiffrer (signer) avec la clé privée** : n'importe qui possédant la clé publique peut déchiffrer, donc aucune confidentialité — mais le fait que le message se déchiffre correctement avec la clé publique prouve qu'il provient bien du détenteur de la clé privée → garantit l'**authenticité** (signature numérique). [Vidéo Explicative](https://www.youtube.com/watch?v=JR4_RBb8A9Q)
-
+ -->

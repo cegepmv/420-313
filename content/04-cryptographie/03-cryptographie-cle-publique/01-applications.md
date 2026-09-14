@@ -5,9 +5,9 @@ draft = false
 +++
 -------------
 
-La cryptographie à clé publique est très utile et possède de nombreuses applications : **échange de clés, signatures numériques, authentification, certificats**, etc. Elle est cependant beaucoup plus coûteuse en termes de ressources que la cryptographie symétrique.
+La cryptographie à clé publique est très utile et possède de nombreuses applications : **échange de clés, signatures numériques, authentification, certificats**, etc.
 
-C’est pourquoi les deux types de cryptographie sont aujourd’hui utilisés de manière **complémentaire** : la cryptographie asymétrique permet notamment d'établir une relation de confiance ou d’échanger une clé, tandis que la cryptographie symétrique est ensuite utilisée pour chiffrer efficacement les données.
+Les mécanismes asymétriques sont généralement plus coûteux que les mécanismes symétriques. Les deux types de cryptographie sont donc utilisés de manière **complémentaire** : la cryptographie asymétrique permet notamment d'établir une relation de confiance, de réaliser certaines opérations d'authentification ou de participer à l'établissement d'une clé, tandis que la cryptographie symétrique est ensuite utilisée pour chiffrer efficacement les données.
 
 ## Échange de clés
 
@@ -31,8 +31,14 @@ Ensuite, chaque fois que A et B souhaitent communiquer, l’un des deux particip
 
 La cryptographie asymétrique n’est donc pas nécessairement utilisée pour chiffrer l’ensemble de la communication. Elle sert plutôt à **établir ou transmettre de manière sécurisée les éléments nécessaires à une communication symétrique**.
 
+{{%notice style="info" title="Dans les systèmes modernes"%}}
+
+Les protocoles modernes, notamment TLS, utilisent généralement des mécanismes d'**échange de clés éphémères** tels que Diffie-Hellman sur courbes elliptiques (ECDHE), plutôt que de transmettre directement une clé de session chiffrée avec RSA.
+
+{{%/notice%}}
+
 {{%notice style="tip" title="À retenir"%}}
-La cryptographie asymétrique permet de résoudre le problème de l’échange initial, tandis que la cryptographie symétrique permet de chiffrer efficacement les données.
+La cryptographie asymétrique permet notamment de résoudre le problème de l'établissement initial d'une communication sécurisée, tandis que la cryptographie symétrique permet de chiffrer efficacement les données.
 {{%/notice%}}
 
 ## Authentification
@@ -71,6 +77,13 @@ A n’a donc jamais besoin de transmettre sa clé privée à B.
 {{%notice style="tip" title="Pourquoi utiliser un défi aléatoire ?"%}}
 Le message utilisé pour l’authentification doit être différent à chaque tentative. On utilise généralement un **nombre aléatoire appelé nonce** afin d’éviter qu’un attaquant puisse simplement enregistrer une ancienne réponse valide et la réutiliser plus tard.
 {{%/notice%}}
+
+Dans cet exemple, A signe un défi relativement court. Pour signer des données plus volumineuses, on utilise généralement une **fonction de hachage** afin de produire une empreinte du message. Cette empreinte est ensuite utilisée dans le processus de signature.
+
+
+
+
+<!-- 
 
 ## Signature numérique
 
@@ -118,4 +131,4 @@ Les certificats et la PKI jouent notamment un rôle essentiel dans **HTTPS**, o�
 La cryptographie à clé publique permet de résoudre plusieurs problèmes, mais elle ne permet pas à elle seule de savoir **à qui appartient une clé publique**.
 
 La **PKI** ajoute une infrastructure de confiance permettant d’associer une clé publique à une identité grâce aux **certificats numériques** et **aux autorités de certification**.
-{{%/notice%}}
+{{%/notice%}} -->
