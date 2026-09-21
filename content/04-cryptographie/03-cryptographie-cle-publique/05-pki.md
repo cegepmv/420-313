@@ -43,13 +43,8 @@ L’ensemble des mécanismes, technologies et organisations permettant de gérer
 Une PKI peut notamment comprendre :
 
 - des **autorités de certification (CA)** ;
-
 - des certificats numériques ;
-
-- des autorités intermédiaires ;
-
 - des mécanismes de gestion et de validation des certificats ;
-
 - des listes ou mécanismes permettant de déterminer si un certificat est encore valide ou doit être révoqué.
 
 La PKI permet ainsi de construire une **chaîne de confiance** entre une clé publique et une identité.

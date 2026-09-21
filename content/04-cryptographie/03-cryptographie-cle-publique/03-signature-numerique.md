@@ -30,9 +30,9 @@ Le destinataire utilise ensuite la clé publique correspondante pour vérifier l
 ```text
 
 Message ──► Hachage ───────────┐
-                              │
-Signature ──► Vérification ◄──┘
-                              │
+                               │
+Signature ──► Vérification  ◄──┘
+                               │
                          Valide / invalide
 ```
 

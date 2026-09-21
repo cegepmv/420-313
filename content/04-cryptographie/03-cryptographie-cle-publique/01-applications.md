@@ -31,11 +31,11 @@ Ensuite, chaque fois que A et B souhaitent communiquer, l’un des deux particip
 
 La cryptographie asymétrique n’est donc pas nécessairement utilisée pour chiffrer l’ensemble de la communication. Elle sert plutôt à **établir ou transmettre de manière sécurisée les éléments nécessaires à une communication symétrique**.
 
-{{%notice style="info" title="Dans les systèmes modernes"%}}
+<!-- {{%notice style="info" title="Dans les systèmes modernes"%}}
 
 Les protocoles modernes, notamment TLS, utilisent généralement des mécanismes d'**échange de clés éphémères** tels que Diffie-Hellman sur courbes elliptiques (ECDHE), plutôt que de transmettre directement une clé de session chiffrée avec RSA.
 
-{{%/notice%}}
+{{%/notice%}} -->
 
 {{%notice style="tip" title="À retenir"%}}
 La cryptographie asymétrique permet notamment de résoudre le problème de l'établissement initial d'une communication sécurisée, tandis que la cryptographie symétrique permet de chiffrer efficacement les données.

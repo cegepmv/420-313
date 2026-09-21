@@ -16,6 +16,8 @@ TLS combine plusieurs mécanismes cryptographiques :
 - la cryptographie symétrique ;
 - les fonctions de hachage et les signatures.
 
+![Étapes de connexion HTTPS/TLS](/images/04-https-tls.png)
+
 Lorsqu'un navigateur se connecte à un serveur HTTPS, il doit notamment :
 
 1. obtenir le certificat du serveur ;
@@ -26,24 +28,8 @@ Lorsqu'un navigateur se connecte à un serveur HTTPS, il doit notamment :
 6. utiliser ensuite une cryptographie symétrique efficace pour protéger les données échangées.
 
 On retrouve donc les différentes notions étudiées dans ce chapitre :
-```text
 
-                  HTTPS / TLS
-                       │
-        ┌──────────────┼──────────────┐
-        ▼              ▼              ▼
-   Certificat     Échange de clés   Signature
-        │              │              │
-        └──────────────┼──────────────┘
-                       ▼
-                Clé de session
-                       │
-                       ▼
-              Chiffrement symétrique
-                       │
-                       ▼
-                 Données HTTPS
-```
+![Résumé de toutes les technologies et notions utilisées par HTTPS/TLS](/images/04-https-tls-resume.png)
 
 {{%notice style="tip" title="À retenir"%}}
 

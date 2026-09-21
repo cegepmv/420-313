@@ -96,11 +96,11 @@ Pour obtenir une véritable garantie d'authenticité, on utilise notamment une *
 
 {{%/notice%}}
 
-### Structures de données
+<!-- ### Structures de données
 
 Les fonctions de hachage sont également utilisées en programmation pour construire des structures de données comme les **tables de hachage** (*hash tables*).
 
-Elles permettent notamment de retrouver efficacement une valeur à partir d'une clé.
+Elles permettent notamment de retrouver efficacement une valeur à partir d'une clé. -->
 
 ### Mots de passe
 

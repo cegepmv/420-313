@@ -14,8 +14,6 @@ draft = false
 
 Les deux parties utilisent la **même clé** pour chiffrer et déchiffrer. Il faut donc que **tous les participants possèdent la clé**, et qu'elle ait été échangée de façon sécurisée au préalable.
 
-**Problème** : Pour un site avec des milliers de visiteurs, il faudrait gérer et distribuer autant de clés de façon sécurisée — un défi de mise à l'échelle majeur.
-
 {{%notice style="info" title="Algorithmes courants"%}}
 **Principaux algorithmes modernes**
 + **AES (*Advanced Encryption Standard*) :** Le standard mondial actuel, qui traite les données par blocs de 128 bits avec des clés de 128, 192 ou 256 bits.
