@@ -65,12 +65,12 @@ Identifiez le fichier de configuration utilisé par le serveur Web.
 
 Sur Ubuntu, vous pouvez notamment examiner :
 
-```bash
+<!-- ```bash
 ls -l /etc/nginx/sites-enabled/
-```
+``` 
 
 et :
-
+-->
 ```bash
 ls -l /etc/nginx/sites-available/
 ```
@@ -89,7 +89,7 @@ Dans le bloc `server`, ajoutez une configuration HTTPS.
 
 Par exemple :
 
-```nginx
+<!-- ```nginx
 server {
     listen 443 ssl;
     listen [::]:443 ssl;
@@ -109,21 +109,25 @@ server {
         try_files $uri $uri/ =404;
     }
 }
+``` -->
+
+```nginx
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+
+    ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+    ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
 ```
-
-Adaptez :
-
-```text
-<nom-du-serveur>
-```
-
-et :
-
-```text
-<répertoire-du-site>
-```
-
-à la configuration existante du serveur.
 
 {{%notice style="note" title="Attention"%}}
 Ne remplacez pas aveuglément la configuration existante du site. Ajoutez ou adaptez le bloc HTTPS en conservant les paramètres nécessaires au fonctionnement du Pokédex.
@@ -158,7 +162,7 @@ Vérifiez ensuite :
 sudo systemctl status nginx
 ```
 
-##### 6. Tester HTTPS
+<!-- ##### 6. Tester HTTPS
 
 Depuis VM1 :
 
@@ -174,12 +178,12 @@ L'option :
 
 demande à `curl` d'accepter un certificat qui n'est pas reconnu par une autorité de certification de confiance.
 
-Vous devriez recevoir le contenu du site Pokédex.
+Vous devriez recevoir le contenu du site Pokédex. -->
 
 
-##### 7. Tester avec un navigateur
+##### 6. Tester avec un navigateur
 
-Dans le navigateur de VM1, ouvrez :
+Dans un navigateur, ouvrez :
 
 ```text
 https://<IP_VM2>

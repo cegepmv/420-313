@@ -158,7 +158,7 @@ Dans les certificats modernes, le nom du serveur doit normalement être présent
 Si votre environnement utilise un nom comme :
 
 ```text
-pokedex.local
+benachourgha-pokedex.lan
 ```
 
 vous pouvez générer un certificat avec :
@@ -169,7 +169,7 @@ sudo openssl req -x509 -nodes -days 365 \
   -keyout /etc/ssl/private/nginx-selfsigned.key \
   -out /etc/ssl/certs/nginx-selfsigned.crt \
   -subj "/C=CA/ST=Quebec/L=Montreal/O=Cégep Marie-Victorin/OU=Département Techniques de l'informatique/CN=pokedex.local" \
-  -addext "subjectAltName=DNS:<nom-de-domaine-du-serveur>"
+  -addext "subjectAltName=DNS:benachourgha-pokedex.lan"
 ```
 
 Si vous utilisez directement l'adresse IP du serveur, vous pouvez plutôt ajouter :
