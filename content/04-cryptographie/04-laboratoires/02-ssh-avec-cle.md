@@ -223,9 +223,9 @@ ssh -vv <UTILISATEUR>@<IP_VM2>
 
 6. Quelle différence y a-t-il entre le mot de passe du compte et la passphrase de la clé privée ?
 7. Où la clé publique est-elle enregistrée sur VM2 ?
-8. Pourquoi est-il possible de placer la clé publique sur le serveur sans compromettre la clé privée ?
-9. Quelle clé reste sur VM1 ?
-10. Quelle clé est copiée sur VM2 ?
+8. Quelle clé reste sur VM1 ?
+9. Quelle clé est copiée sur VM2 ?
+<!-- 8. Pourquoi est-il possible de placer la clé publique sur le serveur sans compromettre la clé privée ? -->
 
 ##### 9. Désactiver l'authentification par mot de passe
 
@@ -314,7 +314,7 @@ La règle devrait permettre les connexions SSH provenant de VM1.
 
 ### Questions de synthèse
 
-11. Pourquoi peut-on considérer VM1 comme un *jump server* dans cette architecture ?
-12. Quelles sont les deux mesures utilisées pour protéger l'accès SSH à VM2 ?
-13. Quelle serait la conséquence si quelqu'un obtenait une copie de votre clé privée ?
-14. Pourquoi une clé privée protégée par une passphrase est-elle plus sécuritaire qu'une clé privée sans protection ?
+10. Pourquoi peut-on considérer VM1 comme un *jump server* dans cette architecture ?
+11. Quelles sont les deux mesures utilisées pour protéger l'accès SSH à VM2 ?
+12. Quelle serait la conséquence si quelqu'un obtenait une copie de votre clé privée ?
+13. Pourquoi une clé privée protégée par une passphrase est-elle plus sécuritaire qu'une clé privée sans protection ?

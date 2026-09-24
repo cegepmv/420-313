@@ -168,8 +168,8 @@ sudo openssl req -x509 -nodes -days 365 \
   -newkey rsa:2048 \
   -keyout /etc/ssl/private/nginx-selfsigned.key \
   -out /etc/ssl/certs/nginx-selfsigned.crt \
-  -subj "/C=CA/ST=Quebec/L=Montreal/O=Cégep Marie-Victorin/OU=Département Techniques de l'informatique/CN=pokedex.local" \
-  -addext "subjectAltName=DNS:benachourgha-pokedex.lan"
+  -subj "/C=CA/ST=Quebec/L=Montreal/O=Cegep Marie-Victorin/OU=Departement Techniques de l'informatique/CN=webghazi" \
+  -addext "subjectAltName=DNS:benachourgha-pokedex.lan,IP:10.10.2.251"
 ```
 
 Si vous utilisez directement l'adresse IP du serveur, vous pouvez plutôt ajouter :
