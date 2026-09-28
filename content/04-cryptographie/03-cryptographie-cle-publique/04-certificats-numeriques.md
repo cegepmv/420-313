@@ -66,7 +66,7 @@ La CA utilise sa clé privée pour signer le certificat.
 
 Le navigateur utilise ensuite la clé publique de la CA pour vérifier cette signature.
 
-```text
+<!-- ```text
 
                  Autorité de certification
                           │
@@ -86,7 +86,7 @@ Le navigateur utilise ensuite la clé publique de la CA pour vérifier cette sig
                           ▼
                     Certificat valide
                     
-```
+``` -->
 
 {{%notice style="info" title="Le rôle d'un certificat"%}}
 

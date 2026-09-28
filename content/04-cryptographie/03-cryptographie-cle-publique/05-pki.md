@@ -48,7 +48,7 @@ Une PKI peut notamment comprendre :
 - des listes ou mécanismes permettant de déterminer si un certificat est encore valide ou doit être révoqué.
 
 La PKI permet ainsi de construire une **chaîne de confiance** entre une clé publique et une identité.
-```text
+<!-- ```text
 
 Autorité racine
        │
@@ -60,4 +60,4 @@ Clé publique du serveur
        │
        ▼
 Identité / domaine
-```
+``` -->
