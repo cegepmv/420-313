@@ -2,7 +2,7 @@
 pre = '3- '
 title = 'Synthèse'
 weight = '583'
-draft = true
+draft = false
 +++
 ----------
 
@@ -28,17 +28,16 @@ Vous disposez d'un fichier :
 hashes_comparaison.txt
 ```
 
-Effectuez les attaques nécessaires pour retrouver les mots de passe.
-
+Effectuez les attaques nécessaires pour retrouver les mots de passe. Pensez à combiner les approches : une attaque par dictionnaire (au besoin avec `--rules`), puis une force brute ciblée pour les mots de passe plus courts.
 Complétez :
 
 | Mot de passe | Longueur | Type | Dictionnaire | Force brute | Difficulté observée |
 |---|---:|---|---|---|---|
-| | | | | | |
-| | | | | | |
-| | | | | | |
-| | | | | | |
-| | | | | | |
+|1 | | | | | |
+| 2| | | | | |
+| 3| | | | | |
+|4 | | | | | |
+| 5| | | | | |
 
 **Questions :**
 1. *Quel mot de passe vous a semblé le plus facile à retrouver ? Pourquoi ?*
@@ -71,25 +70,13 @@ Pour chacun des mots de passe fournis, déterminez quelle stratégie semble la p
 
 ### 3. Attaque hors ligne vs. attaque en ligne
 
-Jusqu'à présent, vous avez travaillé directement avec des hashes.
+Jusqu'à présent, vous avez travaillé directement avec des *hashes*.
 
 Cela représente une situation où un attaquant a réussi à obtenir une copie des données contenant les mots de passe hachés.
 
 Il peut alors effectuer ses tentatives **hors ligne**, sans avoir à communiquer avec le serveur à chaque tentative.
 
-Comparez cette situation avec une attaque contre une page de connexion :
-
-```text
-Attaquant
-    │
-    │  mot de passe
-    ▼
-Serveur
-    │
-    └── accepté / refusé
-```
-
-Dans ce deuxième cas, le serveur peut mettre en place des mécanismes tels que :
+Dans le cas où l'attaque se fait en ligne, directement contre une page de connexion, le serveur peut mettre en place des mécanismes tels que :
 
 - limitation du nombre de tentatives ;
 - délai entre les tentatives ;
@@ -98,7 +85,7 @@ Dans ce deuxième cas, le serveur peut mettre en place des mécanismes tels que 
 - MFA.
 
 **Question :**
-1. *Pourquoi le fait de posséder une copie des hashes peut-il être particulièrement dangereux pour un attaquant ?*
+1. *Pourquoi le fait de posséder une copie des hashes peut-il être particulièrement dangereux ?*
 2. *Pourquoi une attaque de force brute contre un formulaire de connexion Web n'est-elle généralement pas équivalente à une attaque de force brute hors ligne ?*
 
 ### 4. Synthèse
@@ -121,13 +108,13 @@ Montreal2026!
 
 Il affirme :
 
-> « Mon mot de passe contient une majuscule, des minuscules, des chiffres et un symbole. Il est donc très sécurisé. »
+> "Mon mot de passe contient une majuscule, des minuscules, des chiffres et un symbole. Il est donc très sécurisé."
 
 Vous devez évaluer cette affirmation.
 
-1. Quels éléments rendent ce mot de passe prévisible ?
-2. Quelle attaque pourriez-vous essayer en premier ?
-3. Proposez une meilleure stratégie de création de mot de passe. Votre réponse doit expliquer **pourquoi** votre stratégie est plus sécuritaire et non simplement donner un exemple de mot de passe.
+1. *Quels éléments rendent ce mot de passe prévisible ?*
+2. *Quelle attaque pourriez-vous essayer en premier ?*
+3. *Proposez une meilleure stratégie de création de mot de passe. Votre réponse doit expliquer **pourquoi** votre stratégie est plus sécuritaire et non simplement donner un exemple de mot de passe*.
 
 <!-- 
 # 10 — Conclusion

@@ -2,7 +2,7 @@
 pre = '2- '
 title = 'Attaque par force brute'
 weight = '582'
-draft = true
+draft = false
 +++
 -----------
 
@@ -52,15 +52,33 @@ Complétez :
 | 5 | \(10^5\) | |
 | 6 | \(10^6\) | |
 
-**Question :** Que remarquez-vous lorsque la longueur augmente d'un seul caractère ?
+**Question :** *Que remarquez-vous lorsque la longueur augmente d'un seul caractère ?*
 
 ### 2. Expérimentation
 
 Un fichier `hashes_numeric.txt` vous est fourni.
 
-Il contient plusieurs hashes correspondant à des mots de passe numériques de différentes longueurs.
+Il contient plusieurs hashes correspondant à des mots de passe numériques de différentes longueurs (de 2 à 6 chiffres).
 
-Lancez une attaque permettant d'effectuer une recherche exhaustive dans l'espace de caractères approprié.
+Avec **John the Ripper**, vous pouvez effectuer une recherche exhaustive sur un espace uniquement composé de chiffres à l'aide de l'option `--mask`. Le symbole `?d` représente un chiffre :
+
+```bash
+john hashes_numeric.txt --mask='?d' --min-len=2 --max-len=6
+```
+
+Affichez les résultats :
+
+```bash
+john --show hashes_numeric.txt
+```
+
+{{%notice style="tip" title="Observer une seule longueur à la fois"%}}
+Pour mieux mesurer l'effet de la longueur, vous pouvez lancer l'attaque longueur par longueur (pensez à supprimer `~/.john/john.pot` entre chaque essai) :
+
+```bash
+john hashes_numeric.txt --mask='?d' --min-len=4 --max-len=4
+```
+{{%/notice%}}
 
 Notez le temps nécessaire pour retrouver chaque mot de passe.
 
