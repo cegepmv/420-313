@@ -1,9 +1,4 @@
-+++
-pre = '<b>04. </b>'
-title = 'Cryptographie'
-weight = '400'
-draft = false
-+++
+# Chapitre 4 - Cryptographie
 
 ---------
 La **cryptographie** est un élément fondamental de la sécurité informatique. Elle permet notamment de protéger la **confidentialité**, l'**intégrité** et l'**authenticité** des informations échangées.
@@ -31,13 +26,7 @@ Le but d'un système cryptographique est de rendre très difficile (idéalement 
 - **Ère post-quantique (émergente)** : recherche actuelle sur des algorithmes résistants aux ordinateurs quantiques.
 
 
-
-+++
-title = 'Cryptographie classique'
-weight = '410'
-draft = false
-+++
--------------
+# 4.1 - Cryptographie classique
 
 ## Algorithme de César
 
@@ -123,12 +112,7 @@ Quel est le texte en clair?
 “Le vieux pêcheur contemplait paisiblement le coucher de soleil”
 {{% /expand %}}
 
-+++
-title = 'Cryptographie moderne'
-weight = '420'
-draft = false
-+++
--------------
+# 4.2 - Cryptographie moderne
 
 ## Le masque jetable (*One-Time Pad*)
 
@@ -212,13 +196,9 @@ La machine servant à effectuer ce décryptage, *Colossus*, peut être considér
 
 + **Vidéo :** [Fonctionnement de la machine Enigma](https://www.youtube.com/watch?v=ybkkiGtJmkM)
 
-+++
-title = 'Cryptographie à clé publique'
-weight = '430'
-draft = false
-+++
 
--------------
+
+# 4.3 - Cryptographie à clé publique
 
 ## Symétrique vs. asymétrique
 
@@ -301,20 +281,7 @@ Le chiffrement asymétrique est nettement plus lent (souvent ~1000 fois) que le 
 
 [Reel explicatif](https://www.youtube.com/shorts/4vUeGKPl3mU)
 
-<!-- ### Chiffrer ou signer ?
-
-- **Chiffrer avec la clé publique** : seule la personne possédant la clé privée correspondante pourra déchiffrer → garantit la **confidentialité**.
-- **Chiffrer (signer) avec la clé privée** : n'importe qui possédant la clé publique peut déchiffrer, donc aucune confidentialité — mais le fait que le message se déchiffre correctement avec la clé publique prouve qu'il provient bien du détenteur de la clé privée → garantit l'**authenticité** (signature numérique). [Vidéo Explicative](https://www.youtube.com/watch?v=JR4_RBb8A9Q)
- -->
-
-
-
-+++
-title = 'Applications'
-weight = '431'
-draft = false
-+++
--------------
+# 4.3.1 - Applications
 
 La cryptographie à clé publique est très utile et possède de nombreuses applications : **échange de clés, signatures numériques, authentification, certificats**, etc.
 
@@ -341,12 +308,6 @@ Ensuite, chaque fois que A et B souhaitent communiquer, l’un des deux particip
 5. Ils peuvent utiliser cette clé avec un algorithme symétrique comme **AES** ou **ChaCha20** pour chiffrer leurs communications.
 
 La cryptographie asymétrique n’est donc pas nécessairement utilisée pour chiffrer l’ensemble de la communication. Elle sert plutôt à **établir ou transmettre de manière sécurisée les éléments nécessaires à une communication symétrique**.
-
-<!-- {{%notice style="info" title="Dans les systèmes modernes"%}}
-
-Les protocoles modernes, notamment TLS, utilisent généralement des mécanismes d'**échange de clés éphémères** tels que Diffie-Hellman sur courbes elliptiques (ECDHE), plutôt que de transmettre directement une clé de session chiffrée avec RSA.
-
-{{%/notice%}} -->
 
 {{%notice style="tip" title="À retenir"%}}
 La cryptographie asymétrique permet notamment de résoudre le problème de l'établissement initial d'une communication sécurisée, tandis que la cryptographie symétrique permet de chiffrer efficacement les données.
@@ -391,65 +352,7 @@ Le message utilisé pour l’authentification doit être différent à chaque te
 
 Dans cet exemple, A signe un défi relativement court. Pour signer des données plus volumineuses, on utilise généralement une **fonction de hachage** afin de produire une empreinte du message. Cette empreinte est ensuite utilisée dans le processus de signature.
 
-
-
-
-<!-- 
-
-## Signature numérique
-
-L’authentification n’est qu’une des applications des **signatures numériques**.
-
-Une signature numérique permet notamment de vérifier :
-
-+ **l’authenticité :** le message a été signé par le détenteur de la clé privée ;
-+ **l’intégrité :** le message n’a pas été modifié depuis sa signature ;
-+ **la non-répudiation**, dans certains contextes : le signataire ne peut pas facilement nier avoir produit la signature, sous réserve des conditions juridiques et techniques applicables.
-
-Le fonctionnement est différent du chiffrement utilisé pour assurer la confidentialité :
-
-+ Pour assurer la **confidentialité**, on chiffre avec la **clé publique du destinataire** et seul le détenteur de la clé privée correspondante peut déchiffrer.
-+ Pour produire une **signature**, le détenteur utilise sa **clé privée** et les autres participants utilisent sa **clé publique** pour vérifier la signature.
-
-Dans la pratique, on ne signe généralement pas directement l’ensemble du message avec l’algorithme asymétrique. On calcule plutôt une **empreinte cryptographique** du message, puis cette empreinte est signée avec la clé privée.
-
-![Principe général d'une signature numérique](/images/04-signature-numerique.png)
-
-Ainsi, si le message est modifié après sa signature, son empreinte ne correspondra plus à celle utilisée lors de la signature et la vérification échouera.
-
-{{%notice style="tip" title="À retenir"%}}
-+ **Clé publique du destinataire → chiffrement → confidentialité**
-
-+ **Clé privée du signataire → signature → authenticité et intégrité**
-{{%/notice%}}
-
-
-## Certificats et infrastructure à clé publique (PKI)
-
-Un dernier problème demeure : **comment savoir à qui appartient réellement une clé publique ?**
-
-Une clé publique peut être distribuée librement, mais un attaquant pourrait tenter de remplacer la clé publique d’un utilisateur par la sienne afin de se faire passer pour lui.
-
-C’est précisément le problème auquel répondent les **certificats numériques**.
-
-Un certificat permet notamment d’associer une **identité** à une **clé publique**. Cette association est validée par une **autorité de certification (CA)**, qui signe elle-même le certificat.
-
-L’ensemble des mécanismes, technologies et organisations permettant de gérer ces clés et certificats constitue une **infrastructure à clé publique (PKI — Public Key Infrastructure)**.
-
-Les certificats et la PKI jouent notamment un rôle essentiel dans **HTTPS**, où ils permettent au navigateur de vérifier l’identité du serveur avant d’établir une communication sécurisée.
-
-{{%notice style="info" title="Le rôle de la PKI"%}}
-La cryptographie à clé publique permet de résoudre plusieurs problèmes, mais elle ne permet pas à elle seule de savoir **à qui appartient une clé publique**.
-
-La **PKI** ajoute une infrastructure de confiance permettant d’associer une clé publique à une identité grâce aux **certificats numériques** et **aux autorités de certification**.
-{{%/notice%}} -->
-
-+++
-title = 'Fonctions de hachage'
-weight = '432'
-draft = false
-+++
--------------
+# 4.3.2 - Fonctions de hachage
 
 ## Définition
 Une **fonction de hachage cryptographique** transforme une donnée de taille quelconque en une valeur de taille fixe appelée **empreinte**, **condensat** ou *hash*.
@@ -542,12 +445,6 @@ Pour obtenir une véritable garantie d'authenticité, on utilise notamment une *
 
 {{%/notice%}}
 
-<!-- ### Structures de données
-
-Les fonctions de hachage sont également utilisées en programmation pour construire des structures de données comme les **tables de hachage** (*hash tables*).
-
-Elles permettent notamment de retrouver efficacement une valeur à partir d'une clé. -->
-
 ### Mots de passe
 
 Les fonctions de hachage sont également utilisées dans les systèmes d'authentification.
@@ -577,13 +474,7 @@ Le hachage est particulièrement utile pour l'intégrité, les structures de don
 
 {{%/notice%}}
 
-
-+++
-title = 'Signature numérique'
-weight = '433'
-draft = false
-+++
--------------
+# 4.3.3 - Signature numérique
 
 
 L’authentification n’est qu’une des applications des **signatures numériques**.
@@ -610,9 +501,9 @@ Le destinataire utilise ensuite la clé publique correspondante pour vérifier l
 ```text
 
 Message ──► Hachage ───────────┐
-                              │
-Signature ──► Vérification ◄──┘
-                              │
+                               │
+Signature ──► Vérification  ◄──┘
+                               │
                          Valide / invalide
 ```
 
@@ -658,12 +549,9 @@ Le fonctionnement précis varie selon l'algorithme, mais le principe général r
 + **Clé privée du signataire → signature → authenticité et intégrité**
 {{%/notice%}}
 
-+++
-title = 'Certificats numériques'
-weight = '434'
-draft = false
-+++
--------------
+
+
+# 4.3.4 - Certificats numériques
 
 
 Un problème demeure : **comment savoir à qui appartient réellement une clé publique ?**
@@ -726,28 +614,6 @@ La CA utilise sa clé privée pour signer le certificat.
 
 Le navigateur utilise ensuite la clé publique de la CA pour vérifier cette signature.
 
-```text
-
-                 Autorité de certification
-                          │
-                    clé privée
-                          │
-                          ▼
-                  Signature du certificat
-                          │
-                          ▼
-                Certificat du serveur
-                          │
-                          ▼
-                      Navigateur
-                          │
-                  vérifie la signature
-                          │
-                          ▼
-                    Certificat valide
-                    
-```
-
 {{%notice style="info" title="Le rôle d'un certificat"%}}
 
 Un certificat ne signifie pas simplement « ce site est fiable ».
@@ -756,98 +622,7 @@ Il permet notamment d'établir une **association vérifiable entre une identité
 
 {{%/notice%}}
 
-+++
-title = 'HTTPS et TLS'
-weight = '436'
-draft = false
-+++
--------------
-## HTTPS et TLS
-
-Les connexions **HTTPS** utilisent le protocole **TLS (Transport Layer Security)**.
-
-TLS combine plusieurs mécanismes cryptographiques :
-
-- la cryptographie à clé publique ;
-- les certificats numériques ;
-- l'échange de clés ;
-- la cryptographie symétrique ;
-- les fonctions de hachage et les signatures.
-
-Lorsqu'un navigateur se connecte à un serveur HTTPS, il doit notamment :
-
-1. obtenir le certificat du serveur ;
-2. vérifier le certificat et sa chaîne de confiance ;
-3. vérifier que le certificat correspond au domaine demandé ;
-4. établir les paramètres cryptographiques de la connexion ;
-5. établir une clé ou des clés de session ;
-6. utiliser ensuite une cryptographie symétrique efficace pour protéger les données échangées.
-
-On retrouve donc les différentes notions étudiées dans ce chapitre :
-```text
-
-                  HTTPS / TLS
-                       │
-        ┌──────────────┼──────────────┐
-        ▼              ▼              ▼
-   Certificat     Échange de clés   Signature
-        │              │              │
-        └──────────────┼──────────────┘
-                       ▼
-                Clé de session
-                       │
-                       ▼
-              Chiffrement symétrique
-                       │
-                       ▼
-                 Données HTTPS
-```
-
-{{%notice style="tip" title="À retenir"%}}
-
-Dans une connexion HTTPS moderne, la cryptographie asymétrique et les certificats servent principalement à **établir la confiance et les paramètres de la connexion**, tandis que la cryptographie symétrique est utilisée pour protéger efficacement les données échangées.
-
-{{%/notice%}}
-
-+++
-title = 'PKI'
-weight = '435'
-draft = false
-+++
--------------
-
-<!-- ## La chaîne de confiance
-
-Dans la pratique, un navigateur ne possède pas nécessairement directement la clé publique de chaque autorité qui signe les certificats des serveurs.
-
-Les certificats peuvent former une **chaîne de confiance**.
-```text
-
-Autorité racine (Root CA)
-          │
-          ▼
-Autorité intermédiaire
-          │
-          ▼
-Certificat du serveur
-          │
-          ▼
-        HTTPS
-```
-
-Les systèmes d'exploitation et les navigateurs disposent d'un ensemble d'**autorités de certification racines de confiance**.
-
-Lorsqu'un navigateur reçoit un certificat, il peut vérifier progressivement la chaîne jusqu'à une autorité racine qu'il reconnaît.
-
-{{%notice style="tip" title="À retenir"%}}
-
-La cryptographie à clé publique permet de vérifier une signature ou d'utiliser une clé publique, mais elle ne permet pas à elle seule de savoir **à qui appartient cette clé**.
-
-Les certificats et la PKI ajoutent une infrastructure permettant d'établir cette relation de confiance.
-
-{{%/notice%}} -->
-
-## Infrastructure à clé publique (PKI)
+# 4.3.5 - Infrastructure à clé publique (PKI)
 
 L’ensemble des mécanismes, technologies et organisations permettant de gérer les clés, les certificats et les relations de confiance constitue une **infrastructure à clé publique (PKI — Public Key Infrastructure)**.
 
@@ -856,30 +631,12 @@ Une PKI peut notamment comprendre :
 - des **autorités de certification (CA)** ;
 - des certificats numériques ;
 - des mécanismes de gestion et de validation des certificats ;
-
 - des listes ou mécanismes permettant de déterminer si un certificat est encore valide ou doit être révoqué.
 
 La PKI permet ainsi de construire une **chaîne de confiance** entre une clé publique et une identité.
-```text
 
-Autorité racine
-       │
-       ▼
-Certificat
-       │
-       ▼
-Clé publique du serveur
-       │
-       ▼
-Identité / domaine
-```
-+++
-title = 'HTTPS et TLS'
-weight = '436'
-draft = false
-+++
--------------
-## HTTPS et TLS
+
+# 4.3.6 - HTTPS et TLS
 
 Les connexions **HTTPS** utilisent le protocole **TLS (Transport Layer Security)**.
 
@@ -891,6 +648,8 @@ TLS combine plusieurs mécanismes cryptographiques :
 - la cryptographie symétrique ;
 - les fonctions de hachage et les signatures.
 
+![Étapes de connexion HTTPS/TLS](/images/04-https-tls.png)
+
 Lorsqu'un navigateur se connecte à un serveur HTTPS, il doit notamment :
 
 1. obtenir le certificat du serveur ;
@@ -901,27 +660,100 @@ Lorsqu'un navigateur se connecte à un serveur HTTPS, il doit notamment :
 6. utiliser ensuite une cryptographie symétrique efficace pour protéger les données échangées.
 
 On retrouve donc les différentes notions étudiées dans ce chapitre :
-```text
 
-                  HTTPS / TLS
-                       │
-        ┌──────────────┼──────────────┐
-        ▼              ▼              ▼
-   Certificat     Échange de clés   Signature
-        │              │              │
-        └──────────────┼──────────────┘
-                       ▼
-                Clé de session
-                       │
-                       ▼
-              Chiffrement symétrique
-                       │
-                       ▼
-                 Données HTTPS
-```
+![Résumé de toutes les technologies et notions utilisées par HTTPS/TLS](/images/04-https-tls-resume.png)
 
 {{%notice style="tip" title="À retenir"%}}
-
 Dans une connexion HTTPS moderne, la cryptographie asymétrique et les certificats servent principalement à **établir la confiance et les paramètres de la connexion**, tandis que la cryptographie symétrique est utilisée pour protéger efficacement les données échangées.
-
 {{%/notice%}}
+
+
+# 4.4 - Cryptographie post-quantique
+
+## Regard vers l'avenir : l'informatique quantique
+
+Toute la cryptographie à clé publique vue dans ce chapitre (*RSA*, *Diffie-Hellman*) repose sur des problèmes mathématiques réputés difficiles à résoudre pour un ordinateur classique, principalement la *factorisation de grands nombres* et le *calcul de logarithme discret*.
+
+## Algorithme de Shor
+
+En 1994, le mathématicien **Peter Shor** a démontré qu'un **ordinateur quantique** suffisamment puissant pourrait résoudre ces deux problèmes de façon efficace, rendant potentiellement obsolètes *RSA* et *Diffie-Hellman* tels qu'utilisés aujourd'hui.
+
+{{%notice style="info" title="Nuance importante"%}}
+Cette menace concerne spécifiquement le chiffrement **asymétrique**. Le chiffrement **symétrique** (AES) et les fonctions de **hachage** demeurent globalement robustes face aux ordinateurs quantiques.
+{{%/notice%}}
+
+## Où en est-on réellement ?
+
+Le développement d'un ordinateur quantique capable de casser *RSA* en pratique nécessite un nombre de **qubits logiques** (après correction d'erreurs) largement supérieur à ce qui est démontré publiquement à ce jour. 
+
+{{%notice style="note" title="Distinction importante"%}}
+Il est important de distinguer la **recherche théorique**, bien établie, de la **menace opérationnelle** à court terme, qui reste incertaine et dépend de percées technologiques encore à venir.
+{{%/notice%}}
+
+## « *Harvest now, decrypt later* »
+
+Une des raisons pour lesquelles il faut commencer à se préparer dès maintenant est une stratégie connue sous le nom de :
+
+> **Harvest now, decrypt later**
+>
+> *Collecter maintenant, déchiffrer plus tard*.
+
+Imaginons qu'un attaquant intercepte aujourd'hui une communication chiffrée avec une technologie à clé publique vulnérable à un futur ordinateur quantique. L'attaquant ne peut peut-être pas la déchiffrer aujourd'hui mais il peut cependant :
+
+1. intercepter la communication;
+2. conserver les données chiffrées;
+3. attendre qu'une technologie suffisamment puissante soit disponible;
+4. tenter de déchiffrer les données plusieurs années plus tard.
+
+
+Cette menace est particulièrement importante pour les informations qui doivent rester confidentielles pendant de nombreuses années.
+
+Par exemple :
++ des dossiers médicaux;
++ des secrets industriels;
++ des données de recherche;
++ des informations gouvernementales;
++ des données personnelles sensibles;
++ des communications diplomatiques ou stratégiques.
+
+{{%notice style="info" title="Recommendations du NIST"%}}
+**NIST** identifie explicitement le scénario *harvest now, decrypt later* comme une raison de commencer la transition vers la cryptographie post-quantique avant l'apparition d'un ordinateur quantique capable de casser les systèmes actuels.
+{{%/notice%}}
+
+## La cryptographie post-quantique
+
+La **cryptographie post-quantique**, ou **PQC** (*Post-Quantum Cryptography*), désigne des algorithmes cryptographiques conçus pour résister aux attaques provenant aussi bien des ordinateurs classiques que des ordinateurs quantiques.
+
+L'objectif n'est pas de créer une cryptographie qui fonctionne sur un ordinateur quantique.
+
+Au contraire, les algorithmes post-quantiques sont généralement destinés à fonctionner sur les infrastructures informatiques classiques que nous utilisons aujourd'hui.
+
+L'idée est plutôt de **remplacer progressivement** les mécanismes de cryptographie à clé publique vulnérables à l'algorithme de Shor.
+
+### Les algorithmes « *quantum-resistant* »
+
+Les algorithmes post-quantiques s'appuient sur d'autres problèmes mathématiques réputés difficiles même pour un ordinateur quantique, notamment :
+
+- les **réseaux euclidiens** (*lattices*) ;
+- les **codes correcteurs d'erreurs** ;
+- certaines constructions basées sur le **hachage**.
+
+{{%notice style="note" title="Nuance importante"%}}
+Un algorithme est considéré comme **post-quantique** parce que sa sécurité est conçue pour résister aux attaques connues provenant d'ordinateurs quantiques. Cela ne signifie pas qu'il est démontré mathématiquement impossible à casser.
+{{%/notice%}}
+
+### Les premiers standards post-quantiques du NIST
+
+Le **NIST** (*National Institute of Standards and Technology*) a organisé pendant plusieurs années un processus international d'évaluation et de sélection d'algorithmes post-quantiques.
+
+En août 2024, trois premiers standards ont été finalisés :
+
+|Standard|	Algorithme|	Fonction principale|	Famille|
+|-------|--------|--------|-----|
+|**FIPS 203**|	**ML-KEM**|	Établissement de clé	|Réseaux euclidiens|
+|**FIPS 204**|	**ML-DSA**|	Signature numérique	|Réseaux euclidiens|
+|**FIPS 205**|	**SLH-DSA**|	Signature numérique|	Hachage|
+
+## Approches de transition
+
+Dans l'attente d'une adoption complète des algorithmes post-quantiques, plusieurs organisations déploient déjà des solutions **hybrides**, combinant un algorithme classique (*RSA* ou *ECC*) et un algorithme post-quantique pour un même échange de clé, afin de rester protégées même si l'un des deux algorithmes venait à être cassé.

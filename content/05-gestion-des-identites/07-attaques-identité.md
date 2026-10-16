@@ -27,7 +27,9 @@ Si un utilisateur réutilise le même mot de passe sur plusieurs services, un at
 
 Cette technique est appelée **credential stuffing**.
 
+{{%notice style="tip" title=" "%}}
 L'utilisation de **mots de passe uniques** pour chaque service et de la **MFA** permet de réduire considérablement ce risque.
+{{%/notice%}}
 
 ## Vol de session
 
@@ -37,7 +39,9 @@ Si un attaquant parvient à obtenir un **identifiant de session valide**, il peu
 
 Ce type d'attaque est appelé **vol de session** (*session hijacking*).
 
+{{%notice style="tip" title=" "%}}
 La protection des communications avec **HTTPS**, la sécurisation des cookies et l'expiration des sessions sont parmi les mécanismes permettant de réduire ce risque.
+{{%/notice%}}
 
 ## Fatigue MFA
 
@@ -47,7 +51,10 @@ Dans une attaque de **fatigue MFA** (*MFA fatigue*), l'attaquant dispose déjà 
 
 L'objectif est de pousser l'utilisateur à accepter accidentellement une demande, simplement pour faire cesser les notifications.
 
+{{%notice style="tip" title=" "%}}
 Des mécanismes comme l'affichage d'un **code de correspondance** (*number matching*) et la sensibilisation des utilisateurs permettent notamment de réduire ce risque.
+{{%/notice%}}
+
 
 ## Escalade de privilèges
 
@@ -59,8 +66,8 @@ Par exemple, un compte compromis possédant uniquement des droits de lecture pou
 
 C'est notamment pour cette raison que le **principe du moindre privilège** est important : même lorsqu'un compte est compromis, les permissions disponibles pour l'attaquant restent limitées.
 
-{{%notice style="info" title="Des attaques qui se complètent"%}}
 
+{{%notice style="info" title="Des attaques qui se complètent"%}}
 Ces attaques peuvent être combinées.
 
 Par exemple :

@@ -39,13 +39,14 @@ Une attaque contre un service en ligne est généralement limitée par des méca
 
 À l'inverse, lorsqu'un attaquant obtient une copie de mots de passe **hachés**, il peut parfois effectuer beaucoup plus de tentatives hors ligne.
 
-{{%notice style="info" title="La longueur reste essentielle"%}}
-
 Ces calculs montrent l'importance de la **longueur** et de l'unicité d'un mot de passe.
 
-En pratique, cependant, un attaquant ne teste pas nécessairement toutes les combinaisons possibles. Les mots de passe courants, les informations personnelles et les modèles prévisibles peuvent être testés en priorité.
+{{%notice style="info" title="En pratique"%}}
+En pratique, cependant, un attaquant ne teste pas nécessairement toutes les combinaisons possibles. Les mots de passe courants, les informations personnelles et les modèles prévisibles peuvent être testés en priorité (attaque par dictionnaire).
 
 Un mot de passe long mais prévisible, comme `MotDePasse123456`, peut donc être beaucoup plus facile à trouver qu'un mot de passe généré aléatoirement.
+{{%/notice%}}
 
+{{%notice style="tip" title=" "%}}
 L'**authentification multifacteur** demeure par conséquent une protection importante, même lorsqu'un utilisateur possède un mot de passe robuste.
 {{%/notice%}}

@@ -31,7 +31,7 @@ Au lieu de demander le mot de passe Google de l'utilisateur, l'application peut 
 
 Le jeton peut être limité à certaines permissions. Par exemple, une application pourrait être autorisée à **lire** certains fichiers sans être autorisée à les modifier.
 
-{{%notice style="info" title="OAuth ≠ authentification"%}}
+<!-- {{%notice style="info" title="OAuth ≠ authentification"%}}
 
 **OAuth est un mécanisme d'autorisation et de délégation d'accès**, pas un protocole d'authentification à proprement parler.
 
@@ -42,5 +42,5 @@ On peut donc retenir :
 - **OAuth → « Qu'est-ce que cette application peut faire ? »**
 - **OIDC → « Qui est l'utilisateur ? »**
 
-{{%/notice%}}
+{{%/notice%}} -->
 

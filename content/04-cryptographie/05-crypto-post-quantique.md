@@ -117,6 +117,13 @@ SLH-DSA (Stateless Hash-Based Digital Signature Algorithm) est également un alg
 Cette diversité est importante : utiliser plusieurs familles mathématiques permet de ne pas dépendre d'une seule hypothèse de sécurité.
 
 SLH-DSA est notamment dérivé de SPHINCS+.
+
+HttpOnly: Hides the cookie from client-side scripts like document.cookie to prevent session theft via Cross-Site Scripting (XSS).
+
+Secure: Forces the browser to send the cookie only over encrypted HTTPS connections, preventing Man-in-the-Middle (MITM) interception.
+
+SameSite: Restricts when the cookie is sent during cross-site requests to help prevent Cross-Site Request Forgery (CSRF).
+
  -->
 
 ## Approches de transition

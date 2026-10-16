@@ -9,6 +9,7 @@ enableEmoji = true
   disableLandingPageButton = true
   themeVariant = ['zen-dark', 'zen-light']
   collapsibleMenu = true
+  alwaysopen = false
   [params.logo]
     src = '/images/logo.png'
     direction = 'row'
