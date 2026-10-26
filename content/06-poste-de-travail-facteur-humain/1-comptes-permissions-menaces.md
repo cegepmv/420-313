@@ -1,5 +1,5 @@
 +++
-title = 'Comptes, permissions et menaces courantes'
+title = 'Comptes, permissions et menaces'
 weight = '610'
 draft = false
 +++

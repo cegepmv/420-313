@@ -309,10 +309,6 @@ Ensuite, chaque fois que A et B souhaitent communiquer, l’un des deux particip
 
 La cryptographie asymétrique n’est donc pas nécessairement utilisée pour chiffrer l’ensemble de la communication. Elle sert plutôt à **établir ou transmettre de manière sécurisée les éléments nécessaires à une communication symétrique**.
 
-{{%notice style="tip" title="À retenir"%}}
-La cryptographie asymétrique permet notamment de résoudre le problème de l'établissement initial d'une communication sécurisée, tandis que la cryptographie symétrique permet de chiffrer efficacement les données.
-{{%/notice%}}
-
 ## Authentification
 
 La cryptographie à clé publique peut également être utilisée à des fins d’**authentification**.
@@ -757,3 +753,877 @@ En août 2024, trois premiers standards ont été finalisés :
 ## Approches de transition
 
 Dans l'attente d'une adoption complète des algorithmes post-quantiques, plusieurs organisations déploient déjà des solutions **hybrides**, combinant un algorithme classique (*RSA* ou *ECC*) et un algorithme post-quantique pour un même échange de clé, afin de rester protégées même si l'un des deux algorithmes venait à être cassé.
+
+# 5. Laboratoires
+
+# 5.1 Analyser un certificat
+
+## Objectifs
+
+- identifier les principales informations contenues dans un certificat numérique;
+- identifier l'autorité de certification (CA) qui a signé un certificat;
+- déterminer la période de validité d'un certificat;
+- identifier le nom de domaine associé à un certificat;
+- identifier les algorithmes utilisés;
+- comprendre le rôle d'un certificat dans une connexion HTTPS.
+
+##### 1. Choisir un site HTTPS
+
+Choisissez un site Web utilisant **HTTPS**.
+
+Par exemple :
+
+```text
+https://www.wikipedia.org
+```
+
+##### 2. Examiner le certificat avec le navigateur
+
+Ouvrez le site dans votre navigateur, cliquez sur l'icône indiquant que la connexion est sécurisée, généralement représentée par un **cadenas** à gauche de l'adresse du site.
+
+Accédez ensuite aux informations détaillées du certificat.
+
+##### 3. Relever les informations du certificat
+
+Complétez le tableau suivant à partir du certificat du site choisi.
+
+| Information | Réponse |
+|---|---|
+| Nom du site | |
+| Nom du certificat / sujet (Subject) | |
+| Autorité ayant émis le certificat (Issuer) | |
+| Date de début de validité | |
+| Date d'expiration | |
+| Algorithme de signature | |
+| Algorithme de clé publique | |
+| Taille de la clé publique | |
+| Nom(s) de domaine dans le certificat (SAN) | |
+| Le certificat est-il autosigné ? | |
+| Le certificat est-il actuellement valide ? | |
+
+
+###### **Questions**
+1. Quelle organisation a émis le certificat du serveur ?
+2. Pourquoi le navigateur fait-il confiance à cette autorité ?
+3. Quelle est la différence entre l'**émetteur (Issuer)** et le **sujet (Subject)** d'un certificat ?
+4. À quoi sert la date d'expiration d'un certificat ?
+5. Pourquoi un certificat doit-il contenir le nom du domaine auquel il s'applique ?
+6. Que se passerait-il si vous consultiez un site dont le certificat était expiré ?
+7. Quelle différence y a-t-il entre un certificat signé par une CA reconnue et un certificat autosigné ?
+
+##### 4. Observer le certificat avec OpenSSL
+
+Il est également possible d'obtenir des informations sur un certificat directement à partir d'un terminal.
+
+La commande suivante permet d'établir une connexion TLS avec un serveur :
+
+```bash
+openssl s_client -connect www.wikipedia.org:443 -servername www.wikipedia.org
+```
+
+La sortie contient beaucoup d'informations.
+
+Pour obtenir uniquement les informations principales du certificat, utilisez :
+
+```bash
+openssl s_client -connect www.wikipedia.org:443 -servername www.wikipedia.org </dev/null 2>/dev/null | openssl x509 -noout -subject -issuer -dates
+```
+
+Vous devriez obtenir des informations similaires à :
+
+```text
+subject=...
+issuer=...
+notBefore=...
+notAfter=...
+```
+
+###### **Questions**
+
+8. Quelle information correspond au sujet du certificat ?
+9. Quelle information correspond à l'autorité de certification ?
+10. Que représentent `notBefore` et `notAfter` ?
+
+# 5.2. Laboratoire OpenSSL
+
+-------------
+## Certificat autosigné avec OpenSSL
+
+En règle générale, lorsqu’un serveur doit obtenir un certificat reconnu publiquement, celui-ci est émis par une **autorité de certification**.
+
+Dans certains contextes, notamment un laboratoire, un environnement de développement ou un serveur interne, il peut être utile de générer soi-même un certificat.
+
+Un **certificat autosigné** est un certificat signé par sa propre clé privée plutôt que par une autorité de certification.
+
+OpenSSL fournit les outils nécessaires pour générer et examiner des certificats numériques.
+
+{{%notice style="warning" title="Certificat autosigné"%}}
+
+Un certificat autosigné permet de comprendre le fonctionnement d'un certificat, mais il ne bénéficie pas automatiquement de la confiance des navigateurs et des systèmes.
+
+Il est donc particulièrement adapté aux **laboratoires, tests et environnements internes**.
+
+{{%/notice%}}
+
+## Générer une clé privée
+
+La première étape consiste à générer la clé privée du serveur.
+```bash
+openssl genrsa -out certif.key 2048
+```
+La clé privée doit être conservée secrète et protégée contre tout accès non autorisé.
+
+## Générer une demande de certificat
+
+Ensuite, nous générons une demande de certificat :
+```bash
+openssl req -new -key certif.key -out certif.csr
+```
+Cette commande crée un fichier contenant notamment les informations nécessaires à la création du certificat ainsi que la clé publique correspondant à la clé privée.
+
+## Vérifier la demande
+
+Pour afficher le contenu de la demande :
+```bash
+openssl req -text -noout -verify -in certif.csr
+```
+On peut notamment observer les informations du sujet et la clé publique.
+
+## Générer le certificat autosigné
+
+Enfin, nous générons le certificat :
+```bash
+openssl x509 -req -days 365 \
+    -in certif.csr \
+    -signkey certif.key \
+    -out certif.crt
+```
+La clé privée du serveur est utilisée ici pour signer le certificat.
+
+Le fichier `certif.crt` contient notamment :
+
+- les informations du certificat ;
+- la clé publique ;
+- la période de validité ;
+- la signature ;
+- les informations relatives à l'émetteur.
+
+## Afficher le certificat
+
+Pour afficher son contenu :
+```bash
+openssl x509 -in certif.crt -text -noout
+```
+
+Vous devriez notamment être capables d'identifier :
+
+- le **sujet** ;
+- l'**émetteur** ;
+- la **période de validité** ;
+- la **clé publique** ;
+- l'**algorithme de signature** ;
+- la **signature du certificat**.
+
+{{%notice style="tip" title="Lien avec la PKI"%}}
+
+Dans ce laboratoire, le certificat est signé par le serveur lui-même.
+
+Dans une PKI réelle, le certificat d'un serveur est généralement signé par une **autorité de certification**.
+
+Le laboratoire permet donc de comprendre le fonctionnement d'un certificat avant d'introduire la notion de **chaîne de confiance**.
+
+{{%/notice%}}
+
+# 5.3 SSH avec paire de clés
+
+## Objectifs
+
+- générer une paire de clés SSH;
+- distinguer une clé privée d'une clé publique;
+- utiliser une clé publique pour s'authentifier auprès d'un serveur;
+- configurer SSH pour utiliser l'authentification par clé;
+- désactiver l'authentification par mot de passe;
+- comprendre une application concrète de la cryptographie à clé publique.
+
+
+## Architecture du laboratoire
+
+![Architecture du laboratoire 2](/images/04-lab2-architecture.png)
+
++ Deux machines virtuelles vous sont fournies: 
+  - **VM1** sera la machine cliente;
+  - **VM2** sera le serveur SSH;
++ vous utiliserez VM1 pour vous connecter à VM2;
++ VM2 ne devra plus accepter l'authentification SSH par mot de passe.
+
+{{%notice style="info" title="Important"%}}
+Ne désactivez pas l'authentification par mot de passe avant d'avoir vérifié que l'authentification par clé fonctionne correctement.
+{{%/notice%}}
+
+## Étapes du laboratoire
+
+##### 1. Identifier les machines
+
+Votre enseignant vous a communiqué les adresses IP de vos deux machines virtuelles :
+
+```text
+VM1 : <IP_VM1>
+VM2 : <IP_VM2>
+```
+
+Vous vous connecterez aux deux machines avec l'utilisateur :
+
+```text
+root
+```
+
+Dans la suite du laboratoire, remplacez `<IP_VM1>` et `<IP_VM2>` par les adresses IP qui vous ont été fournies.
+
+Vous pouvez confirmer que vous êtes bien sur la bonne machine avec :
+
+```bash
+hostname
+ip a
+```
+
+| Information | VM1 | VM2 |
+|---|---|---|
+| Nom d'hôte | | |
+| Adresse IP | `<IP_VM1>` (fournie) | `<IP_VM2>` (fournie) |
+| Utilisateur | root | root |
+
+##### 2. Tester l'authentification actuelle
+
+Depuis VM1, connectez-vous à VM2 avec SSH :
+
+```bash
+ssh root@<IP_VM2>
+```
+
+Vous devriez actuellement pouvoir vous connecter avec le mot de passe du compte.
+
+Une fois connecté, vérifiez que vous êtes bien sur VM2 :
+
+```bash
+hostname
+```
+
+Puis quittez la connexion :
+
+```bash
+exit
+```
+
+##### 3. Générer une paire de clés SSH
+
+Sur **VM1**, générez une paire de clés avec *Ed25519* :
+
+```bash
+ssh-keygen -t ed25519
+```
+
+Lorsque le programme demande :
+
+```text
+Enter file in which to save the key:
+```
+
+Appuyez sur **Entrée** pour utiliser l'emplacement proposé.
+
+Vous pouvez ensuite définir une phrase secrète (*passphrase*) pour protéger votre clé privée.
+
+
+{{%notice style="tip" title="À retenir"%}}
+
+La commande crée généralement deux fichiers :
+
+```text
+~/.ssh/id_ed25519
+~/.ssh/id_ed25519.pub
+```
+
+La clé privée :
+
+```text
+~/.ssh/id_ed25519
+```
+
+La clé publique :
+
+```text
+~/.ssh/id_ed25519.pub
+```
+{{%/notice%}}
+
+##### 4. Observer les deux clés
+
+Affichez les permissions :
+
+```bash
+ls -l ~/.ssh/id_ed25519*
+```
+
+Affichez votre clé publique :
+
+```bash
+cat ~/.ssh/id_ed25519.pub
+```
+
+Vous pouvez afficher la clé publique, mais **ne partagez jamais votre clé privée**.
+
+Pour observer les caractéristiques de la clé publique :
+
+```bash
+ssh-keygen -lf ~/.ssh/id_ed25519.pub
+```
+
+###### **Questions**
+1. Quel fichier correspond à la clé privée ?
+2. Quel fichier correspond à la clé publique ?
+3. Pourquoi la clé privée ne doit-elle jamais être copiée sur le serveur ?
+4. Quel algorithme est utilisé par cette paire de clés ?
+5. À quoi sert la *passphrase* ?
+
+##### 5. Installer la clé publique sur VM2
+
+Depuis VM1 :
+
+```bash
+ssh-copy-id <UTILISATEUR>@<IP_VM2>
+```
+
+Le programme vous demandera le mot de passe du compte sur VM2.
+
+Cette étape copie la clé publique sur VM2 dans le fichier :
+
+```text
+~/.ssh/authorized_keys
+```
+
+##### 6. Vérifier la clé sur VM2
+
+Connectez-vous à VM2 :
+
+```bash
+ssh <UTILISATEUR>@<IP_VM2>
+```
+
+Puis vérifiez :
+
+```bash
+cat ~/.ssh/authorized_keys
+```
+
+Vous devriez retrouver votre clé publique.
+
+##### 7. Tester l'authentification par clé
+
+Depuis VM1 :
+
+```bash
+ssh <UTILISATEUR>@<IP_VM2>
+```
+
+Cette fois, SSH devrait utiliser votre clé.
+
+Si vous avez défini une *passphrase*, SSH peut vous demander :
+
+```text
+Enter passphrase for key ...
+```
+
+Il s'agit de la **phrase secrète protégeant votre clé privée**, et non du mot de passe du compte sur VM2.
+
+##### 8. Vérifier que la clé est utilisée
+
+Utilisez le mode détaillé :
+
+```bash
+ssh -v <UTILISATEUR>@<IP_VM2>
+```
+
+Repérez dans la sortie les messages indiquant qu'une clé publique est utilisée.
+
+Vous pouvez également utiliser :
+
+```bash
+ssh -vv <UTILISATEUR>@<IP_VM2>
+```
+
+###### **Questions**
+
+6. Quelle différence y a-t-il entre le mot de passe du compte et la passphrase de la clé privée ?
+7. Où la clé publique est-elle enregistrée sur VM2 ?
+8. Quelle clé reste sur VM1 ?
+9. Quelle clé est copiée sur VM2 ?
+<!-- 8. Pourquoi est-il possible de placer la clé publique sur le serveur sans compromettre la clé privée ? -->
+
+##### 9. Désactiver l'authentification par mot de passe
+
+Une fois que vous avez confirmé que l'authentification par clé fonctionne, connectez-vous à VM2 et modifiez :
+
+```bash
+sudo nano /etc/ssh/sshd_config
+```
+
+Vérifiez que les paramètres suivants sont présents :
+
+```text
+PubkeyAuthentication yes
+PasswordAuthentication no
+```
+
+##### 10. Vérifier la configuration SSH
+
+Avant de redémarrer SSH :
+
+```bash
+sudo sshd -t
+```
+
+Si aucune erreur n'est affichée, la syntaxe est correcte.
+
+Redémarrez ensuite le service :
+
+```bash
+sudo systemctl restart ssh
+```
+
+##### 11. Tester l'interdiction du mot de passe
+
+Depuis VM1, votre connexion par clé doit toujours fonctionner :
+
+```bash
+ssh <UTILISATEUR>@<IP_VM2>
+```
+
+Pour tester que l'authentification par mot de passe est bien désactivée, vous pouvez forcer temporairement SSH à ne pas utiliser de clé :
+
+```bash
+ssh -o PubkeyAuthentication=no <UTILISATEUR>@<IP_VM2>
+```
+
+La connexion devrait être refusée.
+
+{{%notice style="warning" title="Attention"%}}
+Ne fermez pas votre dernière session SSH fonctionnelle avant d'avoir vérifié que la nouvelle configuration fonctionne.
+{{%/notice%}}
+
+### Questions de synthèse
+
+10. Pourquoi peut-on considérer VM1 comme un *jump server* dans cette architecture ?
+11. Quelles sont les deux mesures utilisées pour protéger l'accès SSH à VM2 ?
+12. Quelle serait la conséquence si quelqu'un obtenait une copie de votre clé privée ?
+13. Pourquoi une clé privée protégée par une passphrase est-elle plus sécuritaire qu'une clé privée sans protection ?
+
+
+# 5.4 Certificat autosigné
+
+
+## Objectifs
+
+- générer une clé privée avec OpenSSL;
+- générer un certificat X.509;
+- comprendre le lien entre une clé privée, une clé publique et un certificat;
+- créer un certificat autosigné;
+- examiner le contenu d'un certificat avec OpenSSL.
+
+
+##### 1. Vérifier la présence d'OpenSSL
+
+Sur **VM2** :
+
+```bash
+openssl version
+```
+
+Vous devriez obtenir une version d'OpenSSL.
+
+##### 2. Créer les répertoires nécessaires
+
+Vérifiez que les répertoires existent :
+
+```bash
+ls /etc/ssl/private
+ls /etc/ssl/certs
+```
+
+Nous utiliserons `/etc/ssl/private/` pour la clé privée et `/etc/ssl/certs/` pour le certificat.
+
+
+##### 3. Générer le certificat autosigné
+
+Dans ce laboratoire, nous allons générer simultanément :
+
+- une clé privée RSA;
+- un certificat X.509;
+- un certificat autosigné.
+
+Utilisez :
+
+```bash
+sudo openssl req -x509 -nodes -days 365 \
+  -newkey rsa:2048 \
+  -keyout /etc/ssl/private/nginx-selfsigned.key \
+  -out /etc/ssl/certs/nginx-selfsigned.crt
+```
+
+OpenSSL vous demandera différentes informations.
+
+Entrez notamment :
+
+```text
+Country Name (2 letter code) [AU]: CA
+State or Province Name (full name) [Some-State]: Quebec
+Locality Name (eg, city) []: Montreal
+Organization Name (eg, company) [Internet Widgits Pty Ltd]: Cégep Marie-Victorin
+Organizational Unit Name (eg, section) []: Département Techniques de l'informatique
+Common Name (e.g. server FQDN or YOUR name) []: <nom du serveur>
+Email Address []: <votre adresse courriel du cégep>
+```
+
+
+{{%notice style="tip" title="Pourquoi utiliser `-nodes`?"%}}
+
+L'option :
+
+```text
+-nodes
+```
+
+demande à OpenSSL de ne pas chiffrer la clé privée avec une passphrase.
+
+Cela simplifie l'utilisation de la clé par Nginx, car Nginx doit pouvoir lire automatiquement sa clé privée lorsqu'il démarre.
+
+Dans un environnement réel, la protection de la clé privée doit être étudiée avec soin.
+{{%/notice%}}
+
+##### 4. Vérifier les fichiers créés
+
+```bash
+sudo ls -l /etc/ssl/private/nginx-selfsigned.key
+sudo ls -l /etc/ssl/certs/nginx-selfsigned.crt
+```
+
+Vous avez maintenant :
+
+```text
+nginx-selfsigned.key
+        │
+        └── clé privée
+
+nginx-selfsigned.crt
+        │
+        └── certificat X.509 autosigné
+```
+
+##### 5. Examiner le certificat
+
+Utilisez :
+
+```bash
+sudo openssl x509 \
+  -in /etc/ssl/certs/nginx-selfsigned.crt \
+  -text \
+  -noout
+```
+
+Repérez notamment :
+
+- `Subject`
+- `Issuer`
+- `Validity`
+- `Not Before`
+- `Not After`
+- `Public Key Algorithm`
+- `Public-Key`
+- `Signature Algorithm`
+
+###### **Questions**
+
+1. Qui est le sujet (`Subject`) du certificat ?
+2. Qui est l'émetteur (`Issuer`) ?
+3. Pourquoi le sujet et l'émetteur sont-ils identiques dans ce certificat ?
+4. Quelle est la période de validité du certificat ?
+5. Quel algorithme est utilisé pour la clé publique ?
+6. Quelle est la taille de la clé ?
+7. Quel algorithme est utilisé pour signer le certificat ?
+8. Quelle différence y a-t-il entre le certificat et la clé privée ?
+
+##### 6. Vérifier la clé privée
+
+Vous pouvez examiner les informations de la clé avec :
+
+```bash
+sudo openssl rsa \
+  -in /etc/ssl/private/nginx-selfsigned.key \
+  -text \
+  -noout
+```
+
+{{%notice style="warning" title="Attention"%}}
+**Ne transmettez jamais le contenu complet de cette clé à une autre personne.**
+{{%/notice%}}
+
+##### 7. Ajouter un nom de domaine au certificat
+
+Dans les certificats modernes, le nom du serveur doit normalement être présent dans l'extension **Subject Alternative Name (SAN)**.
+
+Si votre environnement utilise un nom comme :
+
+```text
+benachourgha-pokedex.lan
+```
+
+vous pouvez générer un certificat avec :
+
+```bash
+sudo openssl req -x509 -nodes -days 365 \
+  -newkey rsa:2048 \
+  -keyout /etc/ssl/private/nginx-selfsigned.key \
+  -out /etc/ssl/certs/nginx-selfsigned.crt \
+  -subj "/C=CA/ST=Quebec/L=Montreal/O=Cegep Marie-Victorin/OU=Departement Techniques de l'informatique/CN=webghazi" \
+  -addext "subjectAltName=DNS:benachourgha-pokedex.lan,IP:10.10.2.251"
+```
+
+Si vous utilisez directement l'adresse IP du serveur, vous pouvez plutôt ajouter :
+
+```text
+-addext "subjectAltName=IP:<IP_VM2>"
+```
+
+Vous pouvez aussi avoir les deux :
+
+```bash
+-addext "subjectAltName=DNS:<nom-de-domaine-du-serveur>,IP:<IP_VM2>"
+```
+
+##### 8. Vérifier le SAN
+
+```bash
+sudo openssl x509 \
+  -in /etc/ssl/certs/nginx-selfsigned.crt \
+  -text \
+  -noout
+```
+
+Cherchez :
+
+```text
+X509v3 Subject Alternative Name:
+```
+
+Vous devriez voir le nom et/ou l'adresse IP utilisés.
+
+# 5.5 HTTPS
+
+## Objectifs
+
+- configurer un serveur web (Nginx) pour utiliser un certificat TLS;
+- activer HTTPS;
+- associer une clé privée à un certificat;
+- vérifier une configuration Nginx;
+- tester une connexion HTTPS;
+- comprendre le fonctionnement d'un certificat autosigné dans un serveur Web.
+
+Vous utiliserez la même VM2 que dans les laboratoires précédents.
+
+
+Avant le laboratoire, le site fonctionne en `HTTP`. Votre objectif est de permettre également `HTTPS`
+
+##### 1. Vérifier le fonctionnement actuel
+
+Depuis VM1, ouvrez :
+
+```text
+http://<IP_VM2>
+```
+
+Vous devriez voir le site Web **Pokédex**.
+
+##### 2. Vérifier la configuration actuelle de Nginx
+
+Sur VM2 :
+
+```bash
+sudo nginx -t
+```
+
+Puis :
+
+```bash
+sudo systemctl status nginx
+```
+
+Identifiez le fichier de configuration utilisé par le serveur Web.
+
+Sur Ubuntu, vous pouvez notamment examiner :
+
+<!-- ```bash
+ls -l /etc/nginx/sites-enabled/
+``` 
+
+et :
+-->
+```bash
+ls -l /etc/nginx/sites-available/
+```
+
+---
+
+##### 3. Ajouter HTTPS
+
+Ouvrez le fichier de configuration du site :
+
+```bash
+sudo nano /etc/nginx/sites-available/default
+```
+
+Dans le bloc `server`, ajoutez une configuration HTTPS.
+
+Par exemple :
+
+<!-- ```nginx
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+
+    server_name <nom-du-serveur>;
+
+    ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+    ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+
+    root <répertoire-du-site>;
+
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+``` -->
+
+```nginx
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+
+    ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+    ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+```
+
+{{%notice style="note" title="Attention"%}}
+Ne remplacez pas aveuglément la configuration existante du site. Ajoutez ou adaptez le bloc HTTPS en conservant les paramètres nécessaires au fonctionnement du Pokédex.
+{{%/notice%}}
+
+##### 4. Vérifier la configuration
+
+Avant de redémarrer Nginx :
+
+```bash
+sudo nginx -t
+```
+
+Vous devriez obtenir :
+
+```text
+syntax is ok
+test is successful
+```
+
+Si une erreur apparaît, **ne redémarrez pas Nginx**. Corrigez d'abord la configuration.
+
+##### 5. Redémarrer Nginx
+
+```bash
+sudo systemctl restart nginx
+```
+
+Vérifiez ensuite :
+
+```bash
+sudo systemctl status nginx
+```
+
+<!-- ##### 6. Tester HTTPS
+
+Depuis VM1 :
+
+```bash
+curl -k https://<IP_VM2>
+```
+
+L'option :
+
+```text
+-k
+```
+
+demande à `curl` d'accepter un certificat qui n'est pas reconnu par une autorité de certification de confiance.
+
+Vous devriez recevoir le contenu du site Pokédex. -->
+
+
+##### 6. Tester avec un navigateur
+
+Dans un navigateur, ouvrez :
+
+```text
+https://<IP_VM2>
+```
+
+Vous devriez voir le site.
+
+Le navigateur devrait toutefois afficher un avertissement concernant le certificat.
+
+C'est **normal** dans ce laboratoire.
+
+Pourquoi ?
+
+Parce que le certificat a été créé par vous-même :
+
+```text
+VM2
+ │
+ └── certificat autosigné
+```
+
+Il n'a pas été signé par une autorité de certification reconnue par le navigateur.
+
+##### 8. Examiner le certificat depuis le navigateur
+
+Affichez les informations du certificat.
+
+Vérifiez notamment :
+
+- le sujet;
+- l'émetteur;
+- la période de validité;
+- la clé publique;
+- le nom du serveur;
+- le fait que le certificat soit autosigné.
+
+Comparez ces informations avec celles obtenues au laboratoire 3.
+
+###### **Questions**
+1. Pourquoi le navigateur affiche-t-il un avertissement ?
+2. Le certificat est-il nécessairement faux ou mal formé parce qu'il est autosigné ?
+3. Quelle différence y a-t-il entre un certificat autosigné et un certificat signé par une CA reconnue ?
+4. Pourquoi le certificat contient-il une clé publique ?
+5. Où se trouve la clé privée utilisée par Nginx ?
+6. Pourquoi cette clé doit-elle rester secrète ?
+7. Quel est le rôle du certificat dans une connexion HTTPS ?
+8. Quel est le rôle de la clé privée dans le serveur Nginx ?
+9. Pourquoi votre navigateur ne considère-t-il pas automatiquement votre certificat autosigné comme digne de confiance ?
+10. Dans un environnement réel, comment pourrait-on remplacer le certificat autosigné utilisé dans ce laboratoire ?

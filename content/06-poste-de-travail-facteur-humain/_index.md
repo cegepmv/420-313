@@ -1,9 +1,11 @@
 +++
 pre = '<b>06. </b>'
-title = 'Sécurité du poste de travail et facteur humain'
+title = 'Sécurité du poste de travail'
 weight = '600'
 draft = false
 +++
+# et facteur humain
+----------------
 
 
 <!-- **À retenir**
