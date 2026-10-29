@@ -45,14 +45,14 @@ Téléchargez [le dossier d'investigation](https://github.com/cegepmv/420-313/ra
 | `04_Connexions_reseau.csv` | Connexions réseau actives (capture de 9 h 58) |
 | `05_Rapport_antivirus.txt` | Historique de l'antivirus |
 
-{{% notice style="tip" title="Rappel : identifiants d'événements Windows" %}}
+<!-- {{% notice style="tip" title="Rappel : identifiants d'événements Windows" %}}
 | ID | Événement |
 |---|---|
 | 4624 | Ouverture de session réussie |
 | 4625 | Échec d'ouverture de session |
 | 4720 | Création d'un compte utilisateur |
 | 4732 | Ajout d'un membre à un groupe local de sécurité |
-{{% /notice %}}
+{{% /notice %}} -->
  
 
 ### 1. Examiner les indices
@@ -83,12 +83,12 @@ Pour chaque fichier, répondez aux questions suivantes.
 Un nom de processus connu ne garantit pas qu'il est légitime, et un programme inconnu n'est pas forcément malveillant. Basez-vous sur des critères vérifiables.
 {{% /notice %}}
  
-##### Les connexions réseau
+###### Les connexions réseau
  
 1. Pour chaque connexion, indiquez le programme responsable et dites si elle vous semble normale.
 2. Quelle connexion mérite une vérification? Quel lien faites-vous avec la partie 1.3?
 
-##### Le rapport antivirus
+###### Le rapport antivirus
  
 1. Qu'est-ce que l'antivirus a détecté, à quelle heure et quelle action a-t-il effectuée?
 2. L'analyse de 9 h 50 n'a rien trouvé. Le poste est-il sain pour autant? Justifiez avec les autres fichiers.
