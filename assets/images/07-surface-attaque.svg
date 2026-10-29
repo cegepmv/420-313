@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 45 1000 430" width="1000" height="430" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Surface d'attaque d'une application Web</title>
+  <defs>
+    <marker id="fleche" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#37474F"/>
+    </marker>
+    <marker id="fleche-rouge" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#C62828"/>
+    </marker>
+  </defs>
+
+  <rect y="45" width="1000" height="430" fill="#FFFFFF"/>
+
+  <!-- Zone côté serveur -->
+  <rect x="490" y="70" width="490" height="340" rx="14" fill="#F1F8E9" stroke="#2E7D32" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="735" y="96" text-anchor="middle" font-size="15" font-weight="700" fill="#2E7D32">Côté serveur : c'est ici que se font les vérifications</text>
+
+  <!-- Navigateur -->
+  <rect x="30" y="130" width="200" height="250" rx="10" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+  <rect x="30" y="130" width="200" height="30" rx="10" fill="#1565C0"/>
+  <rect x="30" y="148" width="200" height="12" fill="#1565C0"/>
+  <circle cx="48" cy="145" r="5" fill="#EF9A9A"/>
+  <circle cx="64" cy="145" r="5" fill="#FFE082"/>
+  <circle cx="80" cy="145" r="5" fill="#A5D6A7"/>
+  <rect x="94" y="138" width="124" height="14" rx="7" fill="#FFFFFF" opacity="0.9"/>
+  <text x="130" y="200" text-anchor="middle" font-size="20" font-weight="700" fill="#0D47A1">Navigateur</text>
+  <text x="130" y="232" text-anchor="middle" font-size="14" fill="#263238">Utilisateur…</text>
+  <text x="130" y="252" text-anchor="middle" font-size="14" fill="#C62828" font-weight="700">ou attaquant</text>
+  <line x1="55" y1="275" x2="205" y2="275" stroke="#90CAF9" stroke-width="1.5"/>
+  <text x="130" y="300" text-anchor="middle" font-size="13" fill="#455A64">Outils dév. (F12),</text>
+  <text x="130" y="318" text-anchor="middle" font-size="13" fill="#455A64">curl, scripts…</text>
+  <text x="130" y="350" text-anchor="middle" font-size="13" fill="#455A64">Peut tout modifier</text>
+
+  <!-- Entrées contrôlées par l'attaquant -->
+  <rect x="268" y="60" width="196" height="276" rx="12" fill="#FDECEA" stroke="#C62828" stroke-width="2.5" stroke-dasharray="7 5"/>
+  <text x="366" y="86" text-anchor="middle" font-size="14" font-weight="700" fill="#C62828">Entrées contrôlées</text>
+  <text x="366" y="104" text-anchor="middle" font-size="14" font-weight="700" fill="#C62828">par l'attaquant</text>
+
+  <g font-size="15" font-weight="600" fill="#FFFFFF" text-anchor="middle">
+    <rect x="283" y="120" width="166" height="36" rx="18" fill="#C62828"/>
+    <text x="366" y="143">Formulaires</text>
+    <rect x="283" y="164" width="166" height="36" rx="18" fill="#C62828"/>
+    <text x="366" y="187">Paramètres d'URL</text>
+    <rect x="283" y="208" width="166" height="36" rx="18" fill="#C62828"/>
+    <text x="366" y="231">Cookies</text>
+    <rect x="283" y="252" width="166" height="36" rx="18" fill="#C62828"/>
+    <text x="366" y="275">Fichiers téléversés</text>
+  </g>
+  <text x="366" y="308" text-anchor="middle" font-size="13" font-style="italic" fill="#C62828">envoyées dans la</text>
+  <text x="366" y="325" text-anchor="middle" font-size="13" font-style="italic" fill="#C62828">requête HTTP(S)</text>
+
+  <!-- Requête -->
+  <line x1="230" y1="205" x2="266" y2="205" stroke="#C62828" stroke-width="2.5"/>
+  <line x1="464" y1="205" x2="518" y2="205" stroke="#C62828" stroke-width="2.5" marker-end="url(#fleche-rouge)"/>
+
+  <!-- Réponse -->
+  <line x1="520" y1="372" x2="232" y2="372" stroke="#37474F" stroke-width="2" marker-end="url(#fleche)"/>
+  <text x="376" y="362" text-anchor="middle" font-size="13" fill="#37474F">Réponse (HTML, JSON)</text>
+
+  <!-- Serveur Web -->
+  <rect x="520" y="130" width="210" height="250" rx="10" fill="#FFFFFF" stroke="#37474F" stroke-width="2"/>
+  <text x="625" y="166" text-anchor="middle" font-size="20" font-weight="700" fill="#263238">Serveur Web</text>
+  <text x="625" y="188" text-anchor="middle" font-size="14" fill="#455A64">Application</text>
+  <g font-size="14" fill="#263238" text-anchor="middle">
+    <rect x="545" y="205" width="160" height="32" rx="6" fill="#ECEFF1" stroke="#B0BEC5"/>
+    <text x="625" y="226">Code serveur</text>
+    <rect x="545" y="245" width="160" height="32" rx="6" fill="#ECEFF1" stroke="#B0BEC5"/>
+    <text x="625" y="266">Sessions</text>
+    <rect x="545" y="285" width="160" height="32" rx="6" fill="#ECEFF1" stroke="#B0BEC5"/>
+    <text x="625" y="306">Système de fichiers</text>
+  </g>
+  <rect x="537" y="328" width="176" height="34" rx="6" fill="#C8E6C9" stroke="#2E7D32"/>
+  <text x="625" y="350" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1B5E20">Validation et autorisation</text>
+
+  <!-- SQL -->
+  <line x1="730" y1="225" x2="808" y2="225" stroke="#37474F" stroke-width="2" marker-end="url(#fleche)"/>
+  <text x="769" y="215" text-anchor="middle" font-size="13" fill="#37474F">SQL</text>
+  <line x1="810" y1="285" x2="732" y2="285" stroke="#37474F" stroke-width="2" marker-end="url(#fleche)"/>
+  <text x="769" y="305" text-anchor="middle" font-size="13" fill="#37474F">Résultats</text>
+
+  <!-- Base de données -->
+  <path d="M810,175 v150 a70,20 0 0 0 140,0 v-150" fill="#FFF3E0" stroke="#E65100" stroke-width="2"/>
+  <ellipse cx="880" cy="175" rx="70" ry="20" fill="#FFE0B2" stroke="#E65100" stroke-width="2"/>
+  <text x="880" y="245" text-anchor="middle" font-size="18" font-weight="700" fill="#BF360C">Base de</text>
+  <text x="880" y="267" text-anchor="middle" font-size="18" font-weight="700" fill="#BF360C">données</text>
+  <text x="880" y="295" text-anchor="middle" font-size="13" fill="#5D4037">comptes, mots de</text>
+  <text x="880" y="312" text-anchor="middle" font-size="13" fill="#5D4037">passe, clients…</text>
+
+  <!-- Règle d'or -->
+  <rect x="150" y="428" width="700" height="38" rx="8" fill="#FFF8E1" stroke="#F9A825" stroke-width="1.5"/>
+  <text x="500" y="453" text-anchor="middle" font-size="15" fill="#263238"><tspan font-weight="700">Règle d'or :</tspan> tout ce qui vient du client est non fiable → valider côté serveur</text>
+</svg>
