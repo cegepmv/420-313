@@ -1,5 +1,9 @@
-
-## 6.4 - Facteur humain et ingénierie sociale
++++
+title = "Facteur humain et ingénierie sociale"
+weight = '640'
+draft = false
++++
+--------------------
 
 ### Le facteur humain
 
@@ -44,10 +48,10 @@ Il ne faut pas se fier uniquement à l'apparence d'un message. L'identité de l'
 Pour réduire les risques d'ingénierie sociale, les utilisateurs devraient :
 
 1. Vérifier les demandes inhabituelles par un canal indépendant.
-2. Ne jamais communiquer leur mot de passe ou un code MFA à une personne qui le demande.
+2. Ne jamais communiquer un mot de passe ou un code MFA à une personne qui le demande.
 3. Éviter d'ouvrir les liens et les pièces jointes suspects.
 4. Ne pas connecter de supports amovibles inconnus.
-5. Verrouiller leur poste lorsqu'ils s'en éloignent.
+5. Verrouiller un poste lorsqu'on s'en éloigne.
 6. Signaler rapidement les messages suspects au service informatique.
 
 ### Que faire en cas de compromission suspectée ?
