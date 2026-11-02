@@ -59,9 +59,18 @@ Cookie: SESSIONID=8f3a9c1e7b2d4f60a1c5
 
 ## Politique de même origine
 
-Le navigateur empêche le JavaScript d'une page de **lire** les données d'une autre **origine** (schéma + hôte + port). Par exemple, `https://site-pirate.com` ne peut pas lire votre boîte courriel ouverte dans un autre onglet.
-
-Deux attaques contournent cette protection :
-
-- le **XSS**, en exécutant du code **à l'intérieur** du site légitime ;
+Le navigateur applique une règle fondamentale : le code JavaScript d'une page ne peut **lire** les données d'une autre page que si elles proviennent de la **même origine**.
+ 
+Une **origine** est définie par le triplet : **schéma + nom d'hôte + port**.
+ 
+| URL comparée à `https://www.cegep.ca/page` | Même origine ? | Raison |
+|---|---|---|
+| `https://www.cegep.ca/autre/page` | ✅ Oui | Seul le chemin diffère |
+| `http://www.cegep.ca/page` | ❌ Non | Schéma différent |
+| `https://moodle.cegep.ca/page` | ❌ Non | Hôte différent |
+| `https://www.cegep.ca:8443/page` | ❌ Non | Port différent |
+ 
+Cette politique empêche un site malveillant de lire directement le contenu de votre boîte courriel ouverte dans un autre onglet. Nous verrons que deux attaques majeures la **contournent** :
+ 
+- le **XSS**, en faisant exécuter du code malveillant **à l'intérieur** de l'origine légitime ;
 - le **CSRF**, qui n'a pas besoin de *lire* la réponse : il lui suffit d'*envoyer* une requête.

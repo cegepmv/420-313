@@ -5,14 +5,14 @@ draft = false
 +++
 ---------
 
-Une **injection** survient lorsque des données fournies par l'utilisateur sont transmises à un **interpréteur** (base de données, shell, navigateur) **mélangées aux instructions**. L'attaquant fournit alors des « données » qui sont interprétées comme du **code**.
+Une **injection** survient lorsque des données fournies par l'utilisateur sont transmises à un **interpréteur** (base de données, shell, navigateur) **mélangées aux instructions**. L'attaquant fournit alors des "données" qui sont interprétées comme du **code**.
 
 Une **injection SQL** survient lorsqu'une application intègre directement une entrée utilisateur dans une requête SQL, permettant de **modifier la logique de la requête**.
 
 ### Exemple : contournement d'une authentification
 
 ```python
-# Code VULNÉRABLE : concaténation
+# ❌ Code VULNÉRABLE Python : concaténation
 
 requete = "SELECT * FROM comptes WHERE nom = '" + utilisateur + \
           "' AND mdp = '" + mot_de_passe + "'"
@@ -39,22 +39,29 @@ Selon les droits du compte de base de données, une injection SQL peut atteindre
 La **contre-mesure principale** est l'utilisation systématique de **requêtes préparées** (*prepared statements*) avec paramètres liés :
  
 ```python
-# Python
+# ✅ Python
 curseur.execute("SELECT * FROM comptes WHERE nom = ?", (utilisateur,))
 ```
  
 ```php
-// PHP (PDO)
+// ✅ PHP (PDO)
 $stmt = $pdo->prepare("SELECT * FROM comptes WHERE nom = :nom");
 $stmt->execute(['nom' => $utilisateur]);
 ```
- 
+
+{{%notice style="info" title="Explication du code PHP"%}} 
+- `$pdo` représente la connexion à la base de données. **PDO** est la bibliothèque standard de PHP pour accéder aux bases de données.
+- `$pdo->prepare(...)` prépare la requête ; `:nom` est un **paramètre nommé** qui joue le même rôle que le `?` en Python. Le résultat est stocké dans la variable `$stmt`.
+- `$stmt->execute(['nom' => $utilisateur])` exécute la requête en associant la valeur de `$utilisateur` au paramètre `:nom`. 
+{{%/notice%}}
+
 La structure de la requête est **fixée à l'avance** ; la valeur est transmise séparément et ne peut jamais être interprétée comme du SQL. `admin' --` devient un simple texte.
  
 {{%notice style="tip" title="Défense en profondeur"%}}
 - **Moindre privilège** (chapitre 5) : le compte de base de données de l'application n'a que les droits nécessaires (pas de `DROP TABLE` pour une page qui lit des produits).
 - **Messages d'erreur génériques** : ne jamais afficher l'erreur SQL à l'utilisateur.
 {{%/notice%}}
+
 <!-- {{%notice style="info" title="Même principe : l'injection de commandes"%}}
 Une page qui exécute `os.system("ping " + hote)` permet à un attaquant de saisir `8.8.8.8; cat /etc/passwd` pour exécuter une seconde commande. Solution : éviter le shell et passer les arguments séparément (`subprocess.run(["ping", hote])`), valider l'entrée, et ne jamais exécuter le service Web en `root`.
 {{%/notice%}} -->
