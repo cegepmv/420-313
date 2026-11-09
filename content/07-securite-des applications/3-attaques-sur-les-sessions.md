@@ -199,11 +199,15 @@ Identifiez l'attaque : **XSS réfléchi**, **XSS stocké**, **CSRF**, **fixation
 5. Fixation de session
 {{% /expand %}} -->
 
-## Autres attaques courantes
 
+{{%notice style="tip" title="Pour aller plus loin: d'autres attaques courantes"%}}
+Voici d'autres attaques courantes liées aux sessions : 
 - **Contrôle d'accès défaillant (IDOR)** : l'application vérifie que l'utilisateur est **connecté**, mais pas qu'il a **le droit** d'accéder à la ressource. Ex. : changer `bulletin?etudiant=2024123` en `2024124` affiche le bulletin d'un autre étudiant. 
   
   On retrouve la distinction **authentification / autorisation** du chapitre 5 ; la solution est de vérifier les permissions **côté serveur, à chaque requête** (RBAC). C'est le **1er risque** du Top 10 de l'OWASP.
 <!-- - **Traversée de répertoires** : `telecharger?fichier=../../etc/passwd` permet de lire des fichiers hors du dossier prévu. -->
 - **Téléversement non contrôlé** : une « photo de profil » qui est en réalité un script exécuté par le serveur.
 - **Détournement de clic** (*clickjacking*) : le site légitime est affiché dans un cadre invisible, sous un bouton piégé.
+
+Ces attaques sont mentionnées pour les personnes désirant approfondir et aller plus loin. Il n'est pas demandé de les connaître pour les examens de ce cours.
+{{%/notice%}}

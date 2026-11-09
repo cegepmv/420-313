@@ -23,7 +23,7 @@ const db = mysql.createConnection({
 });
 ```
 
-### Extrait 3 (PHP)
+<!-- ### Extrait 3 (PHP)
 
 ```php
 session_start();
@@ -40,9 +40,9 @@ afficher_facture($stmt->fetch());
 + `die("...")` affiche le message et arrête le script. 
 + `$_GET['facture']` est le paramètre `facture` de l'URL (ex. `factures.php?facture=1001`). 
 + `$stmt->fetch()` récupère la ligne trouvée.
-{{%/notice%}}
+{{%/notice%}} -->
 
-### Extrait 4 (PHP)
+### Extrait 3 (PHP)
 
 ```php
 if (!$compte) {
@@ -59,7 +59,7 @@ if (!$compte) {
 {{%/notice%}}
 
 
-### Extrait 5 (HTML + Python)
+### Extrait 4 (HTML + Python)
 
 ```html
 <a href="/admin/supprimer?compte=42">Supprimer ce compte</a>
