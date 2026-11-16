@@ -2,7 +2,7 @@
 pre = '<b>Annexe - </b>'
 title = 'PHP'
 weight = '770'
-draft = false
+draft = true
 +++
 -----------------
 Plusieurs exemples de ce chapitre, ainsi que l'application DVWA utilisée en laboratoire, sont écrits en **PHP**, un langage très répandu pour les sites Web. Il n'est pas nécessaire de savoir écrire du PHP : il suffit de pouvoir le **lire**.

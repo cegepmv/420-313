@@ -40,6 +40,7 @@ Un identifiant de session doit donc être :
 - **long** ;
 - **généré pseudo-aléatoirement** ;
 - **sans signification** : il ne doit contenir ni le nom d'utilisateur, ni la date, ni aucune information devinable.
+
 <!-- {{%notice style="tip" title=" "%}}
 En pratique, il ne faut **pas inventer son propre mécanisme de session** : les cadriciels (*frameworks*) Web modernes (Django, Express...) fournissent des mécanismes de session.
 {{%/notice%}} -->
@@ -191,13 +192,13 @@ Identifiez l'attaque : **XSS réfléchi**, **XSS stocké**, **CSRF**, **fixation
 4. Un attaquant envoie le lien `https://site.exemple/login?PHPSESSID=abc123`, puis utilise `abc123` après que la victime s'est connectée.
 {{%/notice%}}
 
-<!-- {{% expand "Solution" %}}
+{{% expand "Solution" %}}
 1. Manipulation de cookie
 2. XSS stocké
 3. XSS réfléchi
 4. CSRF
 5. Fixation de session
-{{% /expand %}} -->
+{{% /expand %}}
 
 
 {{%notice style="tip" title="Pour aller plus loin: d'autres attaques courantes"%}}
@@ -209,5 +210,5 @@ Voici d'autres attaques courantes liées aux sessions :
 - **Téléversement non contrôlé** : une « photo de profil » qui est en réalité un script exécuté par le serveur.
 - **Détournement de clic** (*clickjacking*) : le site légitime est affiché dans un cadre invisible, sous un bouton piégé.
 
-Ces attaques sont mentionnées pour les personnes désirant approfondir et aller plus loin. Il n'est pas demandé de les connaître pour les examens de ce cours.
+Ces attaques sont mentionnées pour les personnes désirant approfondir et aller plus loin. Il ne sera pas demandé de les connaître pour les examens.
 {{%/notice%}}

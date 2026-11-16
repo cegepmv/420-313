@@ -6,7 +6,7 @@ draft = false
 ---------
 
 {{%notice style="info" title="Contenu bonus"%}}
-Le débordement de tampon est une attaque présentée en bonus : Elle ne sera pas étudiée en classe et il n'est pas demandé de la connaître pour les examens.
+Le débordement de tampon est une attaque présentée en bonus : Elle ne sera pas étudiée en classe et il ne sera pas demandé de la connaître pour les examens.
 {{%/notice%}}
 
 Un **débordement de tampon** se produit lorsqu'un programme écrit des données **au-delà de l'espace mémoire qui leur est alloué**. Il concerne surtout les langages qui gèrent la mémoire manuellement (**C**, **C++**) : systèmes d'exploitation, navigateurs, serveurs, objets connectés.

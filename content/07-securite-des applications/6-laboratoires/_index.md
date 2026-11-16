@@ -39,7 +39,7 @@ draft = false
 
 ## Mise en place
 
-Les laboratoires utilisent **DVWA** (*Damn Vulnerable Web Application*), une application **volontairement vulnérable** conçue pour l'enseignement, installée sur **VM2 des laboratoires du chapitre 4**. Vous y accédez depuis votre poste à l'adresse `http://<IP_VM2>:4280`.
+Les laboratoires utilisent **DVWA** (*Damn Vulnerable Web Application*), une application **volontairement vulnérable** conçue pour l'enseignement, installée sur une des **VM des laboratoires du chapitre 4**. Vous y accédez depuis votre poste à l'adresse `http://<IP_VM>:4280`.
 
 DVWA propose plusieurs niveaux de sécurité (`Low`, `Medium`, `Impossible`) et un bouton **View Source** pour comparer le code vulnérable et le code corrigé.
 
@@ -52,8 +52,8 @@ DVWA ne doit jamais être exposée hors du réseau du laboratoire. Tester ces te
 {{%/notice%}}
 
 {{%notice style="tip" title="Lire le code source de DVWA"%}}
-DVWA est écrite en PHP. Relisez l'encadré [*Lire du PHP : l'essentiel* de l'annexe]({{% ref "07-securite-des-applications/a-php" %}}). Voici en plus les éléments que vous rencontrerez dans **View Source** :
-
+DVWA est écrite en PHP. Voici en plus les éléments que vous rencontrerez dans **View Source** : 
+<!-- Relisez l'encadré [*Lire du PHP : l'essentiel* de l'annexe)-->
 | Code | Signification |
 |---|---|
 | `$id = $_REQUEST['id'];` | Récupère la valeur saisie dans le champ `id` |

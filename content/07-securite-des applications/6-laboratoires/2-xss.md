@@ -4,9 +4,6 @@ weight = '762'
 draft = false
 +++
 ---------------
-## Objectifs
-
-
 
 ### 1. Observer les cookies
 
@@ -31,7 +28,7 @@ Alice
 
 1. Dans votre navigateur (la "victime"), copiez la valeur du cookie `PHPSESSID`.
 2. Ouvrez une **fenêtre de navigation privée** ou un autre navigateur (« l'attaquant ») et accédez à DVWA : la page de connexion s'affiche.
-3. Dans les outils de développement de cette fenêtre, remplacez `PHPSESSID` par la valeur copiée (ajoutez au besoin le cookie `security` = `low`), puis ouvrez `http://<IP_VM2>:4280/index.php`.
+3. Dans les outils de développement de cette fenêtre, remplacez `PHPSESSID` par la valeur copiée (ajoutez au besoin le cookie `security` = `low`), puis ouvrez `http://<IP_VM>:4280/index.php`.
 
 4. Êtes-vous connecté ? Avez-vous eu besoin du mot de passe ? Une MFA aurait-elle empêché cette attaque ?
 5. Cliquez sur **Logout** dans la fenêtre "victime", puis rechargez la fenêtre "attaquant". Que se passe-t-il ? Pourquoi est-ce important ?

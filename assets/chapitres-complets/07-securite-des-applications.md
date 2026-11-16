@@ -70,10 +70,8 @@ Cette politique empêche un site malveillant de lire directement le contenu de v
 - le **XSS**, en faisant exécuter du code malveillant **à l'intérieur** de l'origine légitime ;
 - le **CSRF**, qui n'a pas besoin de *lire* la réponse : il lui suffit d'*envoyer* une requête.
 
-
 # 7.1. Injection SQL
 ---------
-
 Une **injection** survient lorsque des données fournies par l'utilisateur sont transmises à un **interpréteur** (base de données, shell, navigateur) **mélangées aux instructions**. L'attaquant fournit alors des "données" qui sont interprétées comme du **code**.
 
 Une **injection SQL** survient lorsqu'une application intègre directement une entrée utilisateur dans une requête SQL, permettant de **modifier la logique de la requête**.
@@ -119,7 +117,7 @@ $stmt->execute(['nom' => $utilisateur]);
 ```
 
 {{%notice style="info" title="Explication du code PHP"%}} 
-- `$pdo` représente la connexion à la base de données (comme un objet `Connection` en Java). **PDO** est la bibliothèque standard de PHP pour accéder aux bases de données.
+- `$pdo` représente la connexion à la base de données. **PDO** est la bibliothèque standard de PHP pour accéder aux bases de données.
 - `$pdo->prepare(...)` prépare la requête ; `:nom` est un **paramètre nommé** qui joue le même rôle que le `?` en Python. Le résultat est stocké dans la variable `$stmt`.
 - `$stmt->execute(['nom' => $utilisateur])` exécute la requête en associant la valeur de `$utilisateur` au paramètre `:nom`. 
 {{%/notice%}}
@@ -134,6 +132,7 @@ La structure de la requête est **fixée à l'avance** ; la valeur est transmise
 
 # 7.2. Cross-Site Scripting (XSS)
 ---------
+
 
 Le **XSS** est une injection dont l'interpréteur est **le navigateur de la victime**. Il survient lorsqu'une application insère une donnée fournie par un utilisateur dans une page HTML **sans l'encoder**.
 
@@ -191,23 +190,20 @@ Si les identifiants de session sont **prévisibles** (par exemple, un compteur i
  
 Un identifiant de session doit donc être :
  
-- **long** (au moins 128 bits d'entropie) ;
-- **généré par un générateur aléatoire cryptographiquement sûr** (comme les clés du chapitre 4) ;
+- **long** ;
+- **généré pseudo-aléatoirement** ;
 - **sans signification** : il ne doit contenir ni le nom d'utilisateur, ni la date, ni aucune information devinable.
-<!-- {{%notice style="tip" title=" "%}}
-En pratique, il ne faut **pas inventer son propre mécanisme de session** : les cadriciels (*frameworks*) Web modernes (Django, Express...) fournissent des mécanismes de session.
-{{%/notice%}} -->
  
 ### Fixation de session
  
 Dans une attaque par **fixation de session**, l'attaquant ne vole pas l'identifiant : il **impose** à la victime un identifiant qu'il connaît déjà.
  
-```text
-1. L'attaquant obtient un identifiant de session valide (non authentifié) : ABC123.
+**Exemple :** 
+1. L'attaquant obtient un identifiant de session valide (non authentifié) : `ABC123`.
 2. Il amène la victime à utiliser cet identifiant (lien piégé, poste partagé...).
-3. La victime se connecte : le serveur associe son compte à la session ABC123.
-4. L'attaquant utilise ABC123 : il est connecté avec le compte de la victime.
-```
+3. La victime se connecte : le serveur associe son compte à la session `ABC123`.
+4. L'attaquant utilise `ABC123` : il est connecté avec le compte de la victime.
+
  
 **Contre-mesure** : **régénérer l'identifiant de session** après chaque authentification réussie (et après tout changement de privilèges). L'ancien identifiant devient alors inutile.
  
@@ -285,7 +281,7 @@ Le formulaire est envoyé automatiquement, le navigateur joint le cookie de la b
 | D'où vient l'attaque ? | Du code s'exécute **dans le site visé** | La requête vient **d'un autre site** |
 | Le site fait trop confiance... | aux **données** de l'utilisateur | au **navigateur** (le cookie suffit) |
 | L'attaquant lit la réponse ? | Oui | Non |
-| Contre-mesures | Encodage, CSP, `HttpOnly` | Jeton anti-CSRF, `SameSite` |
+| Contre-mesures | Encodage, `HttpOnly` | Jeton anti-CSRF, `SameSite` |
 
 {{%notice style="tip" title="Exercice"%}}
 Identifiez l'attaque : **XSS réfléchi**, **XSS stocké**, **CSRF**, **fixation de session** ou **manipulation de cookie**.
@@ -296,25 +292,32 @@ Identifiez l'attaque : **XSS réfléchi**, **XSS stocké**, **CSRF**, **fixation
 4. Un attaquant envoie le lien `https://site.exemple/login?PHPSESSID=abc123`, puis utilise `abc123` après que la victime s'est connectée.
 {{%/notice%}}
 
-<!-- {{% expand "Solution" %}}
+{{% expand "Solution" %}}
 1. Manipulation de cookie
 2. XSS stocké
 3. XSS réfléchi
 4. CSRF
 5. Fixation de session
-{{% /expand %}} -->
+{{% /expand %}}
 
-## Autres attaques courantes
 
+{{%notice style="tip" title="Pour aller plus loin: d'autres attaques courantes"%}}
+Voici d'autres attaques courantes liées aux sessions : 
 - **Contrôle d'accès défaillant (IDOR)** : l'application vérifie que l'utilisateur est **connecté**, mais pas qu'il a **le droit** d'accéder à la ressource. Ex. : changer `bulletin?etudiant=2024123` en `2024124` affiche le bulletin d'un autre étudiant. 
   
   On retrouve la distinction **authentification / autorisation** du chapitre 5 ; la solution est de vérifier les permissions **côté serveur, à chaque requête** (RBAC). C'est le **1er risque** du Top 10 de l'OWASP.
 - **Téléversement non contrôlé** : une « photo de profil » qui est en réalité un script exécuté par le serveur.
 - **Détournement de clic** (*clickjacking*) : le site légitime est affiché dans un cadre invisible, sous un bouton piégé.
 
+Ces attaques sont mentionnées pour les personnes désirant approfondir et aller plus loin. Il ne sera pas demandé de les connaître pour les examens.
+{{%/notice%}}
 
 # 7.4. Buffer Overflow
 ---------
+
+{{%notice style="info" title="Contenu bonus"%}}
+Le débordement de tampon est une attaque présentée en bonus : Elle ne sera pas étudiée en classe et il ne sera pas demandé de la connaître pour les examens.
+{{%/notice%}}
 
 Un **débordement de tampon** se produit lorsqu'un programme écrit des données **au-delà de l'espace mémoire qui leur est alloué**. Il concerne surtout les langages qui gèrent la mémoire manuellement (**C**, **C++**) : systèmes d'exploitation, navigateurs, serveurs, objets connectés.
 
@@ -330,32 +333,25 @@ Si `nom` contient 100 caractères, les octets excédentaires écrasent la mémoi
 ###### Short explicatif
 {{< youtube-short 4yjZV1Xt_OU >}}
 
-{{%notice style="warning" title="Exemple réel : Heartbleed (2014)"%}}
-Une erreur de vérification de longueur dans **OpenSSL** (l'outil utilisé au chapitre 4) permettait de lire la mémoire des serveurs HTTPS : mots de passe, **cookies de session** et même **clés privées**. Une cryptographie solide ne protège rien si son **implémentation** contient une erreur : c'est le principe du maillon le plus faible (chapitre 2).
-{{%/notice%}}
-
 **Contre-mesures** : fonctions qui limitent la taille (`snprintf`, `fgets` plutôt que `strcpy`, `gets`), langages à mémoire sécurisée (Rust, Java, C#, Python) et **application des correctifs** (chapitre 6).
-
 
 # 7.5. Programmation sécurisé et références
 ---------
-
-
 ## OWASP Top 10
 L'**OWASP** (*Open Worldwide Application Security Project*) est une fondation qui produit des ressources libres sur la sécurité des applications. Son **Top 10** est une référence de l'industrie qui recense les **catégories de risques les plus critiques** des applications Web. La version actuelle date de **2025** :
 
 | Rang | Catégorie | Dans ce cours |
 |---|---|---|
-| A01 | Contrôle d'accès défaillant | 7.5, 7.7, ch. 5 |
-| A02 | Mauvaise configuration de sécurité | 7.10 |
-| A03 | Défaillances de la chaîne d'approvisionnement logicielle | 7.10 |
-| A04 | Défaillances cryptographiques | ch. 4 |
-| A05 | Injection (SQL, commandes, XSS) | 7.3, 7.4 |
-| A06 | Conception non sécurisée | ch. 3 |
-| A07 | Défaillances d'authentification | 7.5, ch. 5 |
-| A08 | Défaillances d'intégrité des logiciels ou des données | ch. 4 (signatures) |
-| A09 | Défaillances de journalisation et d'alerte | ch. 6 |
-| A10 | Mauvaise gestion des conditions exceptionnelles | 7.10 |
+| A01 | Contrôle d'accès défaillant | Ch.7 - Attaques sur les sessions, Ch.5 |
+| A02 | Mauvaise configuration de sécurité | Ch.7 - Principes de programmation sécurisée |
+| A03 | Défaillances de la chaîne d'approvisionnement logicielle | Ch.7 - Principes de programmation sécurisée |
+| A04 | Défaillances cryptographiques | Ch. 4 |
+| A05 | Injection (SQL, commandes, XSS) | Ch.7 - Injection SQL et XSS |
+| A06 | Conception non sécurisée | Ch. 3 |
+| A07 | Défaillances d'authentification | Ch.7 - Attaques sur les sessions, Ch. 5 |
+| A08 | Défaillances d'intégrité des logiciels ou des données | Ch. 4 (signatures) |
+| A09 | Défaillances de journalisation et d'alerte | Ch. 6 |
+| A10 | Mauvaise gestion des conditions exceptionnelles | Ch.7 - Principes de programmation sécurisée |
 
 On remarque que le premier risque n'est pas une attaque sophistiquée, mais le plus souvent un simple **oubli de vérification des permissions**.
 
@@ -365,13 +361,12 @@ On remarque que le premier risque n'est pas une attaque sophistiquée, mais le p
 2. **Séparer le code des données** : requêtes préparées, encodage des sorties.
 3. **Gérer les erreurs sans révéler d'information** : message générique pour l'utilisateur, détails dans les journaux. En cas d'erreur, **refuser** l'accès plutôt que l'accorder.
 4. **Moindre privilège** (chapitre 5) pour le code, les services et les comptes de base de données.
-5. **Secrets jamais en clair dans le code source** : variables d'environnement, fichier `.env` exclu du dépôt (`.gitignore`), gestionnaire de secrets. Un secret publié par erreur sur GitHub doit être **révoqué**, pas seulement supprimé (il reste dans l'historique).
+5. **Secrets jamais en clair dans le code source** : variables d'environnement, fichier `.env` exclu du dépôt (`.gitignore`).
 6. **Maintenir les dépendances à jour** (ex pour Node: `npm audit`) et n'installer que des bibliothèques connues.
 7. **Journaliser** les échecs d'authentification et les refus d'accès (chapitre 6), sans jamais journaliser de mots de passe.
 
 
 {{%notice style="tip" title="À retenir"%}}
-
 | Attaque | Contre-mesure principale | Lien |
 |---|---|---|
 | Injection SQL | Requêtes préparées | Moindre privilège (ch. 5) |
@@ -380,9 +375,7 @@ On remarque que le premier risque n'est pas une attaque sophistiquée, mais le p
 | Fixation de session | Régénérer l'identifiant à la connexion | Sessions (ch. 5) |
 | Manipulation de cookie | Données côté serveur ou signées | Signatures (ch. 4) |
 | CSRF / XSRF | Jeton anti-CSRF, `SameSite` | Sessions (ch. 5) |
-| IDOR | Vérifier l'autorisation côté serveur | RBAC (ch. 5) |
 | Débordement de tampon | Vérifier les tailles, langages sécuritaires | Correctifs (ch. 6) |
-
 {{%/notice%}}
 
 ## Références
@@ -392,20 +385,9 @@ On remarque que le premier risque n'est pas une attaque sophistiquée, mais le p
 + [MDN — Cookies HTTP](https://developer.mozilla.org/fr/docs/Web/HTTP/Cookies)
 + [DVWA](https://github.com/digininja/DVWA)
 
-
-
 # 7.6. Laboratoires
 ---------------
 
-
-<!-- # 7.11 - Laboratoires
-
-| Laboratoire | Objectifs |
-|---|---|
-| Injection SQL | 1 h 15 |
-| XSS et vol de session | 1 h 30 |
-| CSRF | 1 h |
-| Revue de code | 45 min (ou devoir) | -->
 
 ##### [Laboratoire 1 - Injection SQL]({{% ref "07-securite-des-applications/6-laboratoires/1-injection-sql" %}})
 
@@ -431,7 +413,7 @@ On remarque que le premier risque n'est pas une attaque sophistiquée, mais le p
 
 ## Mise en place
 
-Les laboratoires utilisent **DVWA** (*Damn Vulnerable Web Application*), une application **volontairement vulnérable** conçue pour l'enseignement, installée sur **VM2 des laboratoires du chapitre 4**. Vous y accédez depuis votre poste à l'adresse `http://<IP_VM2>:4280`.
+Les laboratoires utilisent **DVWA** (*Damn Vulnerable Web Application*), une application **volontairement vulnérable** conçue pour l'enseignement, installée sur une des **VMs des laboratoires du chapitre 4**. Vous y accédez depuis votre poste à l'adresse `http://<IP_VM>:4280`.
 
 DVWA propose plusieurs niveaux de sécurité (`Low`, `Medium`, `Impossible`) et un bouton **View Source** pour comparer le code vulnérable et le code corrigé.
 
@@ -457,17 +439,6 @@ DVWA est écrite en PHP. Relisez l'encadré [*Lire du PHP : l'essentiel* de l'an
 | `htmlspecialchars(...)` | Encode les caractères spéciaux HTML (section 7.4) |
 | `checkToken(...)` / `generateSessionToken()` | Vérifie / crée un **jeton anti-CSRF** (section 7.6) |
 {{%/notice%}}
-
-<!-- {{%notice style="note" title="Pour l'enseignant — installation sur VM2"%}}
-```bash
-git clone https://github.com/digininja/DVWA.git
-cd DVWA
-# Dans compose.yml, remplacer "127.0.0.1:4280:80" par "4280:80"
-# pour rendre DVWA accessible depuis VM1
-docker compose up -d
-```
-{{%/notice%}} -->
-
 
 
 # 7.6.1. Injection SQL
@@ -514,10 +485,6 @@ Remettez le niveau à **Low**.
 
 # 7.6.2. XSS et vol de session
 ---------------
-## Objectifs
-
-
-
 ### 1. Observer les cookies
 
 Ouvrez les outils de développement (**F12**) → **Application** (Chrome) ou **Stockage** (Firefox) → **Cookies**.
@@ -541,7 +508,7 @@ Alice
 
 1. Dans votre navigateur (la "victime"), copiez la valeur du cookie `PHPSESSID`.
 2. Ouvrez une **fenêtre de navigation privée** ou un autre navigateur (« l'attaquant ») et accédez à DVWA : la page de connexion s'affiche.
-3. Dans les outils de développement de cette fenêtre, remplacez `PHPSESSID` par la valeur copiée (ajoutez au besoin le cookie `security` = `low`), puis ouvrez `http://<IP_VM2>:4280/index.php`.
+3. Dans les outils de développement de cette fenêtre, remplacez `PHPSESSID` par la valeur copiée (ajoutez au besoin le cookie `security` = `low`), puis ouvrez `http://<IP_VM>:4280/index.php`.
 
 4. Êtes-vous connecté ? Avez-vous eu besoin du mot de passe ? Une MFA aurait-elle empêché cette attaque ?
 5. Cliquez sur **Logout** dans la fenêtre "victime", puis rechargez la fenêtre "attaquant". Que se passe-t-il ? Pourquoi est-ce important ?
@@ -567,7 +534,6 @@ Remettez le niveau à **Low**.
 
 # 7.6.3. CSRF
 -------------
-
 ### 1. Analyser la page
 
 Ouvrez **CSRF** et changez le mot de passe pour `test123`. Observez l'URL.
@@ -584,7 +550,7 @@ Remettez le mot de passe à `password`. Sur la **VM**, créez `piege.html` (remp
 <head><meta charset="UTF-8"><title>Concours</title></head>
 <body>
   <h1>Félicitations ! Vous avez gagné une tablette !</h1>
-  <a href="http://<IP_VM>:4280/vulnerabilities/csrf/?password_new=pirate&password_conf=pirate&Change=Change">
+  <a href="http://<IP_VM>:4280/vulnerabilities/csrf/?password_new=pirate&password_conf=pirate&Change=Change#">
     Cliquez ici pour réclamer votre prix</a>
 </body>
 </html>
@@ -614,6 +580,7 @@ Consultez le code du niveau **Impossible**.
 
 Arrêtez le serveur Python (**Ctrl+C**) et réinitialisez la base de données.
 
+
 # 7.6.4. Revue de code
 ------------------
 
@@ -638,25 +605,6 @@ const db = mysql.createConnection({
 ### Extrait 3 (PHP)
 
 ```php
-session_start();
-if (!isset($_SESSION['utilisateur'])) { die("Non connecté"); }
-
-$stmt = $pdo->prepare("SELECT * FROM factures WHERE id = ?");
-$stmt->execute([$_GET['facture']]);
-afficher_facture($stmt->fetch());
-```
-
-{{%notice style="tip" title="Aide à la lecture"%}}
-+ * `session_start()` démarre ou reprend la session de l'utilisateur. 
-+ `isset($_SESSION['utilisateur'])` vérifie qu'un utilisateur est enregistré dans la session, c'est-à-dire qu'il est connecté. 
-+ `die("...")` affiche le message et arrête le script. 
-+ `$_GET['facture']` est le paramètre `facture` de l'URL (ex. `factures.php?facture=1001`). 
-+ `$stmt->fetch()` récupère la ligne trouvée.
-{{%/notice%}}
-
-### Extrait 4 (PHP)
-
-```php
 if (!$compte) {
     echo "Erreur : l'utilisateur " . $_POST['nom'] . " n'existe pas.";
 } elseif (md5($_POST['mdp']) !== $compte['mdp']) {
@@ -670,57 +618,19 @@ if (!$compte) {
 + `!==` signifie "différent de".
 {{%/notice%}}
 
-
-### Extrait 5 (HTML + Python)
-
-```html
-<a href="/admin/supprimer?compte=42">Supprimer ce compte</a>
-```
-
-```python
-@app.route("/admin/supprimer")
-def supprimer():
-    if session.get("role") == "admin":
-        db.execute("DELETE FROM comptes WHERE id = ?", (request.args["compte"],))
-    return redirect("/admin")
-```
-<!-- 
 {{% expand "Solution" %}}
-**Extrait 1** — Injection SQL (A05). Correction : requête préparée :
-`db.execute("SELECT titre, auteur FROM livres WHERE titre LIKE ?", (f"%{titre}%",))`
+**Extrait 1** — Injection SQL (A05). 
++ Correction : requête préparée : `db.execute("SELECT titre, auteur FROM livres WHERE titre LIKE ?", (f"%{titre}%",))`
 
-**Extrait 2** — Secret en clair dans le code (A02 / A04) et compte `root` (non-respect du moindre privilège). Correction : variable d'environnement ou gestionnaire de secrets, `.env` dans `.gitignore`, changement du mot de passe exposé, compte de base de données dédié aux droits limités.
+**Extrait 2** — Secret en clair dans le code (A02 / A04) et compte `root` (non-respect du moindre privilège). 
++ Correction : variable d'environnement ou gestionnaire de secrets, `.env` dans `.gitignore`, changement du mot de passe exposé, compte de base de données dédié aux droits limités.
 
-**Extrait 3** — IDOR / contrôle d'accès défaillant (A01) : on vérifie que l'utilisateur est connecté, mais pas que la facture lui appartient. La requête préparée empêche l'injection, mais **pas** ce problème d'autorisation. Correction : `WHERE id = ? AND proprietaire_id = ?` avec l'identifiant de l'utilisateur en session.
+**Extrait 4** — XSS réfléchi (A05) : 
++ `$_POST['nom']` n'est pas encodé 
+    + Correction : Encoder (`htmlspecialchars`). 
++ Messages différents qui révèlent si un compte existe (A07).
+    + Correction : utiliser un message plus générique ("Identifiants invalides"). 
++ MD5 sans sel (A04)
+    Correction : Utiliser une empreinte avec un sel.
 
-**Extrait 4** — XSS réfléchi (A05) : `$_POST['nom']` n'est pas encodé (`htmlspecialchars`). Messages différents qui révèlent si un compte existe (A07) : utiliser « Identifiants invalides ». MD5 sans sel (A04) : utiliser les fonctions PHP `password_hash()` (calcule une empreinte bcrypt ou Argon2 avec un sel, lors de l'inscription) et `password_verify()` (vérifie le mot de passe saisi, lors de la connexion).
-
-**Extrait 5** — CSRF (A01) : action destructrice par `GET`, sans jeton. Une image `<img src="https://site/admin/supprimer?compte=42">` visitée par un administrateur connecté suffit. Correction : `POST`, jeton anti-CSRF, cookie `SameSite`. *(Bon point : la requête est préparée et le rôle est vérifié côté serveur.)*
-{{% /expand %}} -->
-
-
-# Annexe - PHP
------------------
-Plusieurs exemples de ce chapitre, ainsi que l'application DVWA utilisée en laboratoire, sont écrits en **PHP**, un langage très répandu pour les sites Web. Il n'est pas nécessaire de savoir écrire du PHP : il suffit de pouvoir le **lire**.
- 
-### Lire du PHP : l'essentiel
-
-| PHP | Signification | Équivalent Java |
-|---|---|---|
-| `<?php ... ?>` | Délimite le code PHP dans une page | — |
-| `$nom` | Une variable (toutes commencent par `$`, sans type déclaré) | `String nom` |
-| `"Bonjour " . $nom` | Le point **concatène** des chaînes | `"Bonjour " + nom` |
-| `"Bonjour $nom"` | Entre **guillemets doubles**, PHP remplace `$nom` par sa valeur | `"Bonjour " + nom` |
-| `$pdo->prepare(...)` | La flèche appelle une **méthode** d'un objet | `cnx.prepareStatement(...)` |
-| `['nom' => $x]` | Tableau associatif (clé → valeur) | `Map.of("nom", x)` |
-| `$_GET['q']` | Paramètre `q` de l'URL | `@QueryParam("q")` |
-| `$_POST['nom']` | Champ `nom` d'un formulaire envoyé en `POST` | `@FormParam("nom")` |
-| `$_REQUEST['id']` | Paramètre `id`, qu'il vienne de l'URL ou du formulaire | — |
-| `$_SESSION['x']` | Donnée conservée dans la session, côté serveur | `request.getSession().getAttribute("x")` |
-| `echo "..."` | Écrit le texte dans la page HTML envoyée au navigateur | Valeur retournée par une ressource `@Produces(MediaType.TEXT_HTML)` |
- 
-
-
-{{%notice style="note" title="À surveiller"%}}
-`$_GET`, `$_POST`, `$_REQUEST` et `$_COOKIE` contiennent des données **fournies par l'utilisateur**.
-{{%/notice%}}
+{{% /expand %}}
