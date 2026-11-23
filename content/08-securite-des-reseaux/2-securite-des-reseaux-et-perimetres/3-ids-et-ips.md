@@ -27,7 +27,7 @@ Les systèmes de **détection** (*Intrusion Detection System* ou **IDS**) et de 
  
 | Méthode | Principe | Avantages | Limites |
 |---|---|---|---|
-| **Par signature** | Comparer le trafic à une base de **motifs d'attaques connues** (comme un antivirus, chapitre 6) | Précis, peu de faux positifs | Ne détecte pas les attaques **nouvelles** ; la base doit être mise à jour |
+| **Par signature** | Comparer le trafic à une base de **motifs d'attaques connues** (comme un antivirus, chapitre 6) | Précis, peu de faux positifs | Ne détecte pas les attaques **nouvelles** (*0-Day*); la base doit être mise à jour |
 | **Par anomalie** | Apprendre le comportement **normal** du réseau et signaler ce qui s'en écarte | Peut détecter des attaques inconnues | Plus de faux positifs ; demande une période d'apprentissage |
  
 ## Faux positifs et faux négatifs
@@ -42,7 +42,7 @@ Les systèmes de **détection** (*Intrusion Detection System* ou **IDS**) et de 
 
 ## Anatomie d'une règle Suricata
  
-**Suricata** est un IDS/IPS libre très répandu, intégré au pare-feu **OPNsense**. Sa syntaxe de règles est presque identique à celle de **Snort**, un autre IDS historique.
+**Suricata** est un IDS/IPS libre très répandu, disponible sous forme de paquet dans **pfSense** (TP2). Sa syntaxe de règles est presque identique à celle de **Snort**, un autre IDS historique.
  
 ```text
 alert icmp $HOME_NET any -> any any (msg:"Ping emis depuis le LAN"; itype:8; sid:1000001; rev:1;)

@@ -14,15 +14,15 @@ Pour chaque situation, identifiez l'attaque : **empoisonnement ARP**, **homme du
 4. Connecté au Wi-Fi gratuit d'un café, un utilisateur reçoit un avertissement de certificat en ouvrant le site de sa banque, qui n'affiche jamais d'avertissement d'habitude.
 5. Un serveur reçoit des milliers de requêtes `ping` par seconde, provenant de centaines de caméras IP réparties dans le monde.
 
-<!-- {{% expand "Solution" %}}
+{{% expand "Solution" %}}
 1. Empoisonnement ARP (probablement pour préparer une attaque de l'homme du milieu)
 2. SYN flood
 3. Amplification (DNS), avec usurpation de l'adresse IP de l'entreprise
 4. Homme du milieu (l'attaquant présente son propre certificat ; il ne faut surtout pas accepter l'avertissement)
 5. ICMP flood distribué (DDoS) lancé par un botnet d'objets connectés
-{{% /expand %}} -->
+{{% /expand %}}
 
-### 2. Analyse d'une capture
+<!-- ### 2. Analyse d'une capture
 Un administrateur capture le trafic ARP sur le poste `10.10.50.20` et obtient l'extrait suivant :
 
 | N° | Temps (s) | Source | Destination | Protocole | Info |
@@ -37,7 +37,7 @@ Wireshark ajoute l'avertissement : `duplicate use of 10.10.50.1 detected!`
 1. Que se passe-t-il ?
 2. Quelle adresse MAC appartient probablement à l'attaquant ? Justifiez.
 3. Si `10.10.50.1` est la passerelle du réseau, quelles sont les conséquences pour le poste `10.10.50.20` ?
-4. Proposez deux contre-mesures.
+4. Proposez deux contre-mesures. -->
 
 <!-- {{% expand "Solution" %}}
 1. Deux adresses MAC différentes se déclarent propriétaires de la même adresse IP `10.10.50.1` : c'est un empoisonnement ARP.

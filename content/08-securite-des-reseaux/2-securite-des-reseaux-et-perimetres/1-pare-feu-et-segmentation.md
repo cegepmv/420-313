@@ -10,8 +10,8 @@ draft = false
 Un **pare-feu** (*firewall*) est un équipement ou un logiciel qui **contrôle les flux réseau** entre plusieurs zones, en autorisant ou en bloquant chaque paquet selon un ensemble de **règles**.
  
 Un pare-feu peut être :
-- **réseau** : un équipement placé entre plusieurs réseaux, par exemple entre le réseau de l'entreprise et Internet. C'est le cas d'**OPNsense**, utilisé dans le TP2 ;
-- **local** : un logiciel installé sur un poste ou un serveur, qui ne protège que cette machine (pare-feu Windows, `ufw` sous Linux, chapitre 6).
+- **réseau** : un équipement placé entre plusieurs réseaux, par exemple entre le réseau de l'entreprise et Internet. C'est le cas de **PfSense**, utilisé dans le TP2 ;
+- **local** : un logiciel installé sur un poste ou un serveur, qui ne protège que cette machine (pare-feu Windows, `ufw` et `firewalld` sur Linux, chapitre 6).
 
 ## Sans état ou avec état ?
  
@@ -20,7 +20,7 @@ Un pare-feu peut être :
 | **Sans état** (*stateless*) | Chaque paquet **isolément** : adresses, protocole, ports | Il faut écrire une règle pour l'aller **et** une règle pour le retour |
 | **Avec état** (*stateful*) | Les paquets **et l'état des connexions** en cours | Les **réponses** à une connexion autorisée sont acceptées automatiquement |
  
-Presque tous les pare-feu modernes, dont OPNsense, sont **avec état** : une seule règle « le LAN peut joindre le serveur Web sur le port 80 » suffit, les réponses du serveur sont reconnues et acceptées.
+Presque tous les pare-feu modernes, dont *PfSense*, sont **avec état** : une seule règle « le LAN peut joindre le serveur Web sur le port 80 » suffit, les réponses du serveur sont reconnues et acceptées.
  
 
 {{%notice style="tip" title="NGFW et WAF"%}}
@@ -45,7 +45,7 @@ Une règle de pare-feu précise généralement :
 Deux principes fondamentaux :
  
 1. **Les règles sont lues dans l'ordre, et la première qui correspond s'applique.** Une règle de blocage placée **avant** une règle d'autorisation l'empêche de s'appliquer.
-2. **Refus par défaut** (*default deny*) : tout ce qui n'est pas **explicitement autorisé** est **interdit**. On écrit des règles pour les flux nécessaires, et une dernière règle (souvent implicite) bloque tout le reste. C'est le même principe que la liste de ce qui est accepté pour la validation des entrées (chapitre 7) et que le **moindre privilège** (chapitre 5).
+2. **Refus par défaut** (*default deny*) : tout ce qui n'est pas **explicitement autorisé** est **interdit**. On écrit des règles pour les flux nécessaires, et une dernière règle (souvent implicite) bloque tout le reste. C'est le même principe que <!--la liste de ce qui est accepté pour la validation des entrées (chapitre 7) et que--> le **moindre privilège** (chapitre 5).
 
 **Exemple de table de règles pour l'interface WAN d'une petite entreprise :**
  
