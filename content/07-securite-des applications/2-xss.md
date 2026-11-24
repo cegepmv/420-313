@@ -22,6 +22,7 @@ Avec l'URL `recherche.php?q=<script>alert('XSS')</script>`, le navigateur exécu
 |---|---|---|
 | **XSS réfléchi** | Dans la requête (paramètre d'URL) | La personne qui clique sur le lien piégé (hameçonnage) |
 | **XSS stocké** | Dans la base de données (commentaire, profil, forum) | **Tous** ceux qui consultent la page (le plus dangereux) |
+| **XSS basé sur le DOM** | Dans le modèle de document (DOM) chargé par le navigateur | **Tous** ceux qui consultent la page |
 
 ### Contre-mesures
 
