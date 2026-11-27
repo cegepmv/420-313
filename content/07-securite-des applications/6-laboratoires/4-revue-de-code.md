@@ -82,7 +82,7 @@ def supprimer():
 
 <!-- **Extrait 3** — IDOR / contrôle d'accès défaillant (A01) : on vérifie que l'utilisateur est connecté, mais pas que la facture lui appartient. La requête préparée empêche l'injection, mais **pas** ce problème d'autorisation. Correction : `WHERE id = ? AND proprietaire_id = ?` avec l'identifiant de l'utilisateur en session. -->
 
-**Extrait 4** — XSS réfléchi (A05) : 
+**Extrait 3** — XSS réfléchi (A05) : 
 + `$_POST['nom']` n'est pas encodé 
     + Correction : Encoder (`htmlspecialchars`). 
 + Messages différents qui révèlent si un compte existe (A07).

@@ -43,12 +43,12 @@ On remarque que le premier risque n'est pas une attaque sophistiquée, mais le p
 | Attaque | Contre-mesure principale | Lien |
 |---|---|---|
 | Injection SQL | Requêtes préparées | Moindre privilège (ch. 5) |
-| XSS | Encodage des sorties, CSP | `HttpOnly` |
+| XSS | Encodage des sorties | `HttpOnly` |
 | Vol de session | HTTPS, `Secure`, `HttpOnly` | TLS (ch. 4), sessions (ch. 5) |
 | Fixation de session | Régénérer l'identifiant à la connexion | Sessions (ch. 5) |
 | Manipulation de cookie | Données côté serveur ou signées | Signatures (ch. 4) |
 | CSRF / XSRF | Jeton anti-CSRF, `SameSite` | Sessions (ch. 5) |
-| Débordement de tampon | Vérifier les tailles, langages sécuritaires | Correctifs (ch. 6) |
+<!-- | Débordement de tampon | Vérifier les tailles, langages sécuritaires | Correctifs (ch. 6) | -->
 <!-- | IDOR | Vérifier l'autorisation côté serveur | RBAC (ch. 5) | -->
 
 {{%/notice%}}

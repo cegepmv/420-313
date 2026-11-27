@@ -194,10 +194,9 @@ Identifiez l'attaque : **XSS réfléchi**, **XSS stocké**, **CSRF**, **fixation
 
 {{% expand "Solution" %}}
 1. Manipulation de cookie
-2. XSS stocké
-3. XSS réfléchi
-4. CSRF
-5. Fixation de session
+2. XSS réfléchi
+3. CSRF
+4. Fixation de session
 {{% /expand %}}
 
 

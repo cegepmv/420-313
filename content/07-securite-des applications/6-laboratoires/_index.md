@@ -62,8 +62,8 @@ DVWA est écrite en PHP. Voici en plus les éléments que vous rencontrerez dans
 | `is_numeric($id)` | Vérifie que la valeur est un nombre |
 | `$db->prepare(...)` puis `bindParam(':id', $id, PDO::PARAM_INT)` | Requête préparée : associe `$id` au paramètre `:id`, **en tant qu'entier** |
 | `$data->rowCount()` | Nombre de lignes retournées par la requête |
-| `htmlspecialchars(...)` | Encode les caractères spéciaux HTML (section 7.4) |
-| `checkToken(...)` / `generateSessionToken()` | Vérifie / crée un **jeton anti-CSRF** (section 7.6) |
+| `htmlspecialchars(...)` | Encode les caractères spéciaux HTML (section 7.2) |
+| `checkToken(...)` / `generateSessionToken()` | Vérifie / crée un **jeton anti-CSRF** (section 7.3) |
 {{%/notice%}}
 
 <!-- {{%notice style="note" title="Pour l'enseignant — installation sur VM2"%}}

@@ -294,10 +294,9 @@ Identifiez l'attaque : **XSS réfléchi**, **XSS stocké**, **CSRF**, **fixation
 
 {{% expand "Solution" %}}
 1. Manipulation de cookie
-2. XSS stocké
-3. XSS réfléchi
-4. CSRF
-5. Fixation de session
+2. XSS réfléchi
+3. CSRF
+4. Fixation de session
 {{% /expand %}}
 
 
@@ -370,7 +369,7 @@ On remarque que le premier risque n'est pas une attaque sophistiquée, mais le p
 | Attaque | Contre-mesure principale | Lien |
 |---|---|---|
 | Injection SQL | Requêtes préparées | Moindre privilège (ch. 5) |
-| XSS | Encodage des sorties, CSP | `HttpOnly` |
+| XSS | Encodage des sorties | `HttpOnly` |
 | Vol de session | HTTPS, `Secure`, `HttpOnly` | TLS (ch. 4), sessions (ch. 5) |
 | Fixation de session | Régénérer l'identifiant à la connexion | Sessions (ch. 5) |
 | Manipulation de cookie | Données côté serveur ou signées | Signatures (ch. 4) |
@@ -436,8 +435,8 @@ DVWA est écrite en PHP. Relisez l'encadré [*Lire du PHP : l'essentiel* de l'an
 | `is_numeric($id)` | Vérifie que la valeur est un nombre |
 | `$db->prepare(...)` puis `bindParam(':id', $id, PDO::PARAM_INT)` | Requête préparée : associe `$id` au paramètre `:id`, **en tant qu'entier** |
 | `$data->rowCount()` | Nombre de lignes retournées par la requête |
-| `htmlspecialchars(...)` | Encode les caractères spéciaux HTML (section 7.4) |
-| `checkToken(...)` / `generateSessionToken()` | Vérifie / crée un **jeton anti-CSRF** (section 7.6) |
+| `htmlspecialchars(...)` | Encode les caractères spéciaux HTML (section 7.2) |
+| `checkToken(...)` / `generateSessionToken()` | Vérifie / crée un **jeton anti-CSRF** (section 7.3) |
 {{%/notice%}}
 
 
@@ -625,7 +624,7 @@ if (!$compte) {
 **Extrait 2** — Secret en clair dans le code (A02 / A04) et compte `root` (non-respect du moindre privilège). 
 + Correction : variable d'environnement ou gestionnaire de secrets, `.env` dans `.gitignore`, changement du mot de passe exposé, compte de base de données dédié aux droits limités.
 
-**Extrait 4** — XSS réfléchi (A05) : 
+**Extrait 3** — XSS réfléchi (A05) : 
 + `$_POST['nom']` n'est pas encodé 
     + Correction : Encoder (`htmlspecialchars`). 
 + Messages différents qui révèlent si un compte existe (A07).
